@@ -12,6 +12,7 @@ import { useDebounce } from '@/hooks/use-debounce';
 import { Toaster, toast } from 'react-hot-toast';
 import ScribbleOverlay from '@/components/ScribbleOverlay';
 import SocialShare from '@/components/SocialShare';
+import ImageExporter, { ExportFormat } from '@/lib/image-export';
 
 export interface BlogPost {
   slug: string;
@@ -44,16 +45,16 @@ interface BratConfig {
 }
 
 const defaultConfig: BratConfig = {
-  text: 'brat',
+  text: 'Input Some Text To Generate Your Custom Brat Cover',
   bgColor: 'lime',
   customColor: '#8acf00',
   isCustomColor: false,
-  fontSize: 72,
+  fontSize: 80,
   borderRadius: 8,
   textAlign: 'center',
   flipHorizontal: false,
   flipVertical: false,
-  blurAmount: 2.3,
+  blurAmount: 1.5,
   scribbleStyle: 'none',
 };
 
@@ -74,7 +75,6 @@ export default function Home() {
       img.crossOrigin = "anonymous";
       img.src = '/line.png';
       img.onload = () => {
-        console.log('Scribble image preloaded successfully');
         setScribbleImage(img);
       };
       img.onerror = () => {
@@ -166,356 +166,58 @@ export default function Home() {
     return textColors[config.bgColor as keyof typeof textColors] === 'text-white' ? '#ffffff' : '#000000';
   };
 
-  const handleDownload = useCallback(async () => {
+  const handleDownload = useCallback(async (format: ExportFormat = 'png') => {
     if (isDownloading) return;
     setIsDownloading(true);
     
-    console.log('Starting download process...');
-    
     try {
-      // Method 1: Try using html2canvas (retain full functionality)
-      let downloadSuccess = false;
-      
-      try {
-        console.log('Trying method 1: html2canvas');
-        const { default: html2canvas } = await import('html2canvas');
-        const previewElement = document.getElementById('brat-preview-area');
-        
-        if (!previewElement) {
-          throw new Error('Preview element not found');
-        }
+      const previewElement = document.getElementById('brat-preview-area');
+      if (!previewElement) {
+        throw new Error('Preview element not found');
+      }
 
-        // Wait for fonts to load
-        console.log('Waiting for fonts to load...');
-        await document.fonts.ready;
-        
-        // Ensure DOM rendering is complete
-        await new Promise(resolve => setTimeout(resolve, 200));
-        
-        // Temporarily set styles to ensure correct capture
-        const textElement = previewElement.querySelector('.font-black') as HTMLElement;
-        let originalStyle = '';
-        
-        if (textElement) {
-          originalStyle = textElement.style.cssText;
-          textElement.style.fontFamily = 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
-          textElement.style.fontWeight = '800';
-          textElement.style.letterSpacing = '-0.02em';
+      // 使用ImageExporter进行统一的导出和下载
+      const shareableImageUrl = await ImageExporter.exportAndDownload(
+        previewElement,
+        format,
+        {
+          ...config,
+          textAlign: config.textAlign as 'left' | 'center' | 'right'
         }
+      );
 
-        console.log('Starting html2canvas screenshot...');
-        const canvas = await html2canvas(previewElement, {
-          useCORS: true,
-          allowTaint: true
-        });
-        
-        // Restore original styles
-        if (textElement && originalStyle !== undefined) {
-          textElement.style.cssText = originalStyle;
-        }
-        
-        console.log('html2canvas successful, starting download...');
-        
-        // Create download link
-        const dataURL = canvas.toDataURL('image/png', 1.0);
-        const link = document.createElement('a');
-        link.href = dataURL;
-        link.download = `brat-${config.text.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '-').toLowerCase().substring(0, 20) || 'cover'}.png`;
-        
-        // Save image data URL for sharing
-        setLastGeneratedImageUrl(dataURL);
-        
-        // Ensure download
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        
-        // Delayed cleanup
-        setTimeout(() => {
-          if (document.body.contains(link)) {
-            document.body.removeChild(link);
-          }
-        }, 1000);
-        
-        downloadSuccess = true;
-        console.log('html2canvas download successful');
-        
-      } catch (html2canvasError) {
-        console.warn('html2canvas failed:', html2canvasError);
-        
-        // Special handling for ChunkLoadError
-        if (html2canvasError instanceof Error && html2canvasError.name === 'ChunkLoadError') {
-          console.log('ChunkLoadError detected, attempting to reload html2canvas...');
-          
-          // Clean up potentially corrupted module cache
-          if ('webpackChunkName' in html2canvasError) {
-            delete (window as any).__webpack_require__.cache;
-          }
-          
-          // Wait for a while before retrying
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          
-          try {
-            // Re-import html2canvas dynamically
-            const { default: html2canvas } = await import('html2canvas');
-            console.log('html2canvas reloaded successfully, attempting screenshot again...');
-            
-            const previewElement = document.getElementById('brat-preview-area');
-            if (!previewElement) {
-              throw new Error('Preview element not found');
-            }
-            
-            const canvas = await html2canvas(previewElement, {
-              useCORS: true,
-              allowTaint: true
-            });
-            
-            const dataURL = canvas.toDataURL('image/png', 1.0);
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = `brat-${config.text.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '-').toLowerCase().substring(0, 20) || 'cover'}.png`;
-            
-            // Save image data URL for sharing
-            setLastGeneratedImageUrl(dataURL);
-            
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            
-            setTimeout(() => {
-              if (document.body.contains(link)) {
-                document.body.removeChild(link);
-              }
-            }, 1000);
-            
-            downloadSuccess = true;
-            console.log('html2canvas retry successful');
-            
-          } catch (retryError) {
-            console.warn('html2canvas retry also failed:', retryError);
-            // Continue to manual Canvas method
-          }
-        }
-        
-        if (!downloadSuccess) {
-          console.log('Trying method 2: manual Canvas drawing');
-          
-          // Method 2: Manual Canvas drawing (full functionality retained)
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+      // 保存用于分享的图片URL
+      setLastGeneratedImageUrl(shareableImageUrl);
       
-      if (!ctx) {
-            throw new Error('Unable to create Canvas 2D context');
-      }
-      
-          // High resolution setting
-          const pixelRatio = window.devicePixelRatio || 1;
-          const size = 1200 * pixelRatio;
-      canvas.width = size;
-      canvas.height = size;
-          canvas.style.width = '1200px';
-          canvas.style.height = '1200px';
-          
-          // Scale context to support high DPI
-          ctx.scale(pixelRatio, pixelRatio);
-          const displaySize = 1200;
-          
-          console.log('Starting manual drawing Canvas...');
-          
-          // Get current configuration
-          const bgColor = getCurrentBgColor();
-          const textColor = getCurrentTextColor();
-          const text = (debouncedText || 'brat').toLowerCase();
-      
-      // Draw background
-          ctx.fillStyle = bgColor;
-          ctx.fillRect(0, 0, displaySize, displaySize);
-      
-          // Apply rounded corners
-          if (config.borderRadius > 0) {
-            const radius = Math.min(config.borderRadius * 8, displaySize / 4);
-        ctx.globalCompositeOperation = 'destination-in';
-        ctx.beginPath();
-            
-            // Use more precise rounded drawing
-            ctx.moveTo(radius, 0);
-            ctx.lineTo(displaySize - radius, 0);
-            ctx.quadraticCurveTo(displaySize, 0, displaySize, radius);
-            ctx.lineTo(displaySize, displaySize - radius);
-            ctx.quadraticCurveTo(displaySize, displaySize, displaySize - radius, displaySize);
-            ctx.lineTo(radius, displaySize);
-            ctx.quadraticCurveTo(0, displaySize, 0, displaySize - radius);
-            ctx.lineTo(0, radius);
-            ctx.quadraticCurveTo(0, 0, radius, 0);
-            ctx.closePath();
-            
-        ctx.fill();
-        ctx.globalCompositeOperation = 'source-over';
-      }
-      
-      // Set text styles
-          const fontSize = Math.min(debouncedFontSize * 16, displaySize * 0.6);
-      ctx.fillStyle = textColor;
-          ctx.font = `700 ${fontSize}px "Arial Rounded MT Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`;
-      ctx.textBaseline = 'middle';
-      
-          // Text alignment
-          let textAlign: CanvasTextAlign = 'center';
-          if (config.textAlign === 'left') textAlign = 'left';
-          else if (config.textAlign === 'right') textAlign = 'right';
-          ctx.textAlign = textAlign;
-      
-          // Calculate text position
-          let x = displaySize / 2;
-          if (config.textAlign === 'left') x = displaySize * 0.08;
-          else if (config.textAlign === 'right') x = displaySize * 0.92;
-      
-          // Multi-line text processing
-          const lines = text.split('\n');
-          const lineHeight = fontSize * 0.85;
-      const totalHeight = lines.length * lineHeight;
-          const startY = (displaySize - totalHeight) / 2 + lineHeight / 2;
-      
-      // Apply transformation effect
-      ctx.save();
-          ctx.translate(displaySize / 2, displaySize / 2);
-      
-          // Calculate scaling
-      let scaleX = 1;
-          let scaleY = 1;
-          
-          if (text.length > 12) scaleX = 0.85;
-          if (config.flipHorizontal) scaleX *= -1;
-          if (config.flipVertical) scaleY *= -1;
-          
-          ctx.scale(scaleX, scaleY);
-          ctx.translate(-displaySize / 2, -displaySize / 2);
-          
-          // Draw background texture (if needed)
-          if (config.scribbleStyle === 'texture' && scribbleImage) {
-            console.log('Drawing background texture on Canvas...');
-            const pattern = ctx.createPattern(scribbleImage, 'repeat');
-            if (pattern) {
-              ctx.save();
-              ctx.globalAlpha = 0.3; // Texture use lower transparency
-              ctx.fillStyle = pattern;
-              ctx.fillRect(0, 0, displaySize, displaySize);
-              ctx.restore();
-            }
-          }
-          
-          // Draw text (manual letterSpacing handling)
-          const letterSpacing = -0.05 * fontSize;
-      
-      lines.forEach((line, index) => {
-        const y = startY + index * lineHeight;
-            let currentX = x;
-            const trimmedLine = line.trim();
-            
-            if (config.textAlign === 'center') {
-              const totalWidth = ctx.measureText(trimmedLine).width + (trimmedLine.length - 1) * letterSpacing;
-              currentX = (displaySize - totalWidth) / 2;
-            } else if (config.textAlign === 'right') {
-              const totalWidth = ctx.measureText(trimmedLine).width + (trimmedLine.length - 1) * letterSpacing;
-              currentX = displaySize - totalWidth - (displaySize * 0.08);
-            }
-            
-            for (let i = 0; i < trimmedLine.length; i++) {
-              const char = trimmedLine[i];
-              
-              ctx.save();
-              // Apply combined filter and disable image smoothing for pixelated effect
-              ctx.filter = config.blurAmount > 0 
-                ? `blur(${config.blurAmount * 0.8}px) contrast(1.2) saturate(1.1)` 
-                : 'none';
-              ctx.imageSmoothingEnabled = false;
-              ctx.fillText(char, currentX, y);
-      ctx.restore();
-      
-              currentX += ctx.measureText(char).width + letterSpacing;
-            }
-          });
-          
-          ctx.restore();
-          
-          // Draw destructive scribble (if needed)
-          if (config.scribbleStyle === 'destructive' && scribbleImage) {
-            console.log('Drawing destructive scribble on Canvas...');
-            ctx.save();
-            const imgWidth = displaySize * 0.9;
-            const imgHeight = (imgWidth / scribbleImage.width) * scribbleImage.height;
-            const xPos = (displaySize - imgWidth) / 2;
-            const yPos = (displaySize - imgHeight) / 2;
-            ctx.globalAlpha = 0.9; // Destructive scribble more opaque
-            ctx.drawImage(scribbleImage, xPos, yPos, imgWidth, imgHeight);
-            ctx.restore();
-      }
-      
-          console.log('Canvas drawing completed, starting download...');
-          
-          // Create download
-          const dataURL = canvas.toDataURL('image/png', 1.0);
-      const link = document.createElement('a');
-          link.href = dataURL;
-          link.download = `brat-${config.text.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '-').toLowerCase().substring(0, 20) || 'cover'}.png`;
-      
-          // Save image data URL for sharing
-          setLastGeneratedImageUrl(dataURL);
-      
-          // Ensure download
-          link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-          
-          // Delayed cleanup
-          setTimeout(() => {
-            if (document.body.contains(link)) {
-      document.body.removeChild(link);
-            }
-          }, 1000);
-          
-          downloadSuccess = true;
-          console.log('Manual Canvas download successful');
-        }
-      }
-      
-      if (downloadSuccess) {
-        toast.success('Image download successful! Saved to downloads folder', {
-          position: "top-center",
-          duration: 4000,
-        });
-      }
-      
+      toast.success(`${format.toUpperCase()} 图片下载成功！已保存到下载文件夹`, {
+        position: "top-center",
+        duration: 4000,
+      });
+
     } catch (error) {
-      console.error('All download methods failed:', error);
+      console.error('Download failed:', error);
       
-      // Detailed error analysis and user-friendly tips
-      let errorMessage = 'Download failed: ';
+      // 错误处理
+      let errorMessage = '下载失败: ';
       let suggestion = '';
       
       if (error instanceof Error) {
-        if (error.message.includes('Canvas')) {
-          errorMessage += 'Browser Canvas functionality error';
-          suggestion = 'Please try refreshing the page or use another browser';
-        } else if (error.message.includes('tainted') || error.message.includes('CORS')) {
-          errorMessage += 'Image security restriction';
-          suggestion = 'Please ensure network connection is normal';
-        } else if (error.message.includes('memory') || error.message.includes('Memory')) {
-          errorMessage += 'Insufficient memory';
-          suggestion = 'Please close other tabs and try again';
-        } else if (error.message.includes('network') || error.message.includes('Network')) {
-          errorMessage += 'Network connection issue';
-          suggestion = 'Please check network connection';
-        } else if (error.name === 'ChunkLoadError') {
-          errorMessage += 'Resource loading failed';
-          suggestion = 'Please refresh the page and try again';
+        if (error.message.includes('tainted') || error.message.includes('CORS')) {
+          errorMessage += '图片安全限制';
+          suggestion = '请确保网络连接正常';
+        } else if (error.message.includes('fonts')) {
+          errorMessage += '字体加载失败';
+          suggestion = '请刷新页面重试';
+        } else if (error.message.includes('element')) {
+          errorMessage += '预览元素未找到';
+          suggestion = '请刷新页面重试';
         } else {
-          errorMessage += 'Unknown error';
-          suggestion = 'Please try refreshing the page';
+          errorMessage += '未知错误';
+          suggestion = '请尝试刷新页面';
         }
       } else {
-        errorMessage += 'System error';
-        suggestion = 'Please contact technical support';
+        errorMessage += '系统错误';
+        suggestion = '请联系技术支持';
       }
       
       toast.error(`${errorMessage}. ${suggestion}`, {
@@ -523,9 +225,9 @@ export default function Home() {
         duration: 6000,
       });
       
-      // Provide fallback solution tip
+      // 提供备用方案
       setTimeout(() => {
-        toast('💡 Alternative: You can right-click on the preview image and select "Save image"', {
+        toast('💡 备用方案：您可以右键点击预览图片选择"图片另存为"', {
           position: "top-center",
           duration: 8000,
         });
@@ -533,9 +235,8 @@ export default function Home() {
       
     } finally {
       setIsDownloading(false);
-      console.log('Download process ended');
     }
-  }, [isDownloading, config, debouncedText, debouncedFontSize, getCurrentBgColor, getCurrentTextColor, scribbleImage]);
+  }, [config, isDownloading, setLastGeneratedImageUrl]);
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -558,21 +259,22 @@ export default function Home() {
     lineHeight: debouncedText.includes('\n') ? '0.85' : '0.9',
     textAlign: config.textAlign as 'left' | 'center' | 'right',
     color: getCurrentTextColor(),
-    letterSpacing: '-0.05em',
-    fontWeight: '700',
-    fontFamily: '"Arial Rounded MT Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    letterSpacing: '-0.08em',
+    fontWeight: '900',
+    fontFamily: '"Helvetica Inserat", "Arial Black", "Arial Black Condensed", "Impact", "Arial Rounded MT Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     transition: 'filter 0.2s ease-in-out',
     filter: config.blurAmount > 0 
-      ? `blur(${config.blurAmount}px) contrast(1.2) saturate(1.1)` 
+      ? `blur(${config.blurAmount}px) contrast(1.3) saturate(1.0)` 
       : 'none',
     imageRendering: 'pixelated',
   };
 
-  // Debug log
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Blur status:', config.blurAmount > 0);
-    console.log('TextStyle:', textStyle);
-  }
+  // 移除频繁的调试日志输出
+  // 如需调试，可以取消注释下面的代码
+  // if (process.env.NODE_ENV === 'development') {
+  //   console.log('Blur status:', config.blurAmount > 0);
+  //   console.log('TextStyle:', textStyle);
+  // }
 
   const alignmentOptions = [
     { value: 'left', icon: AlignLeft, label: 'Left' },
@@ -893,27 +595,66 @@ export default function Home() {
                   )}
 
                   {/* Download and Reset Buttons */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <Button 
-                      onClick={handleDownload}
-                      disabled={isDownloading}
-                      className="bg-lime-500 hover:bg-lime-600 text-black font-semibold py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                      size="lg"
-                    >
-                      <Download className={`w-5 h-5 mr-2 ${isDownloading ? 'animate-spin' : ''}`} />
-                      {isDownloading ? 'Downloading...' : 'Download PNG'}
-                    </Button>
-                    
-                    <Button 
-                      onClick={handleReset}
-                      disabled={isDownloading}
-                      variant="outline"
-                      className="border-slate-300 hover:bg-slate-50 font-semibold py-3 text-lg disabled:opacity-50"
-                      size="lg"
-                    >
-                      <RotateCcw className="w-5 h-5 mr-2" />
-                      Reset
-                    </Button>
+                  <div className="space-y-3">
+                    {/* Primary Download Button */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <Button 
+                        onClick={() => handleDownload('png')}
+                        disabled={isDownloading}
+                        className="bg-lime-500 hover:bg-lime-600 text-black font-semibold py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                        size="lg"
+                      >
+                        <Download className={`w-5 h-5 mr-2 ${isDownloading ? 'animate-spin' : ''}`} />
+                        {isDownloading ? 'Downloading...' : 'Download PNG'}
+                      </Button>
+                      
+                      <Button 
+                        onClick={handleReset}
+                        disabled={isDownloading}
+                        variant="outline"
+                        className="border-slate-300 hover:bg-slate-50 font-semibold py-3 text-lg disabled:opacity-50"
+                        size="lg"
+                      >
+                        <RotateCcw className="w-5 h-5 mr-2" />
+                        Reset
+                      </Button>
+                    </div>
+
+                    {/* Additional Format Options */}
+                    <div className="grid grid-cols-3 gap-2">
+                      <Button 
+                        onClick={() => handleDownload('jpeg')}
+                        disabled={isDownloading}
+                        variant="outline"
+                        className="border-slate-300 hover:bg-slate-50 font-medium py-2 text-sm disabled:opacity-50"
+                        size="sm"
+                      >
+                        <Download className="w-4 h-4 mr-1" />
+                        JPEG
+                      </Button>
+                      
+                      <Button 
+                        onClick={() => handleDownload('svg')}
+                        disabled={isDownloading}
+                        variant="outline"
+                        className="border-slate-300 hover:bg-slate-50 font-medium py-2 text-sm disabled:opacity-50"
+                        size="sm"
+                      >
+                        <Download className="w-4 h-4 mr-1" />
+                        SVG
+                      </Button>
+                      
+                      <Button 
+                        onClick={() => handleDownload('blob')}
+                        disabled={isDownloading}
+                        variant="outline"
+                        className="border-slate-300 hover:bg-slate-50 font-medium py-2 text-sm disabled:opacity-50"
+                        size="sm"
+                      >
+                        <Download className="w-4 h-4 mr-1" />
+                        Blob
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </Card>
@@ -977,11 +718,6 @@ export default function Home() {
                 </div>
                 <p className="text-center text-sm text-slate-500 mt-4">
                   1200 × 1200 px high-quality download. Perfect for social media.
-                  {process.env.NODE_ENV === 'development' && (
-                    <span className="block text-xs mt-1">
-                      Debug: Blur {config.blurAmount > 0 ? 'ON' : 'OFF'}
-                    </span>
-                  )}
                 </p>
               </Card>
               

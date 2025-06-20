@@ -54,15 +54,11 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   try {
-    console.log('开始获取博客数据...');
-    
+    // 获取博客数据和分类
     const [allPosts, categories] = await Promise.all([
       getAllPosts(),
       getAllCategories()
     ]);
-
-    console.log(`获取到 ${allPosts.length} 篇博客文章`);
-    console.log(`获取到分类: ${categories.join(', ')}`);
 
     // 计算统计数据
     const totalWords = allPosts.reduce((sum, post) => sum + post.wordCount, 0);
