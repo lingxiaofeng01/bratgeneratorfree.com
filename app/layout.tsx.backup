@@ -3,10 +3,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Brat Generator - Free Brat Text Generator & Album Covers Inspired by Charli XCX',
-    template: '%s | Brat Generator',
+    default: 'Free Brat Generator - Create Viral Album Covers Inspired by Charli XCX',
+    template: '%s | Free Brat Generator',
   },
-  description: 'Create stunning album covers with our free Brat Generator! Design custom brat text generator artwork inspired by Charli XCX aesthetic. Professional brat font generator tools for instant high-quality downloads - completely free to use!',
+  description: 'Create stunning brat album covers with our free brat generator. Design custom brat text generator artwork inspired by Charli XCX aesthetic. Professional brat font generator tools for instant downloads - completely free!',
   keywords: 'free brat generator, brat album cover generator, brat text generator, brat font generator, brat cover generator, charli xcx brat, album cover maker, brat aesthetic, brat meme generator, free brat tools',
   authors: [{ name: 'Free Brat Generator Team' }],
   creator: 'Free Brat Generator',
