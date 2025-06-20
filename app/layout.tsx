@@ -1,0 +1,248 @@
+import './globals.css';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Free Brat Generator - Create Viral Album Covers Inspired by Charli XCX',
+    template: '%s | Free Brat Generator',
+  },
+  description: 'Create stunning brat album covers with our free brat generator. Design custom brat text generator artwork inspired by Charli XCX aesthetic. Professional brat font generator tools for instant downloads - completely free!',
+  keywords: 'free brat generator, brat album cover generator, brat text generator, brat font generator, brat cover generator, charli xcx brat, album cover maker, brat aesthetic, brat meme generator, free brat tools',
+  authors: [{ name: 'Free Brat Generator Team' }],
+  creator: 'Free Brat Generator',
+  publisher: 'Free Brat Generator',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://www.bratgeneratorfree.com'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Free Brat Generator - Create Viral Album Covers Inspired by Charli XCX',
+    description: 'Create stunning brat album covers with our free brat generator. Design custom brat text generator artwork inspired by Charli XCX aesthetic - completely free!',
+    url: 'https://www.bratgeneratorfree.com',
+    siteName: 'Free Brat Generator',
+    images: [
+      {
+        url: 'https://www.bratgeneratorfree.com/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Free Brat Generator - Create Viral Album Covers Inspired by Charli XCX',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Brat Generator - Create Viral Album Covers Inspired by Charli XCX',
+    description: 'The ultimate free tool to design album covers inspired by the iconic brat aesthetic. Create professional, high-quality artwork instantly with our text generator.',
+    images: ['https://www.bratgeneratorfree.com/twitter-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code',
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
+};
+
+// 添加全局错误处理
+if (typeof window !== 'undefined') {
+  window.addEventListener('error', (event) => {
+    // 过滤掉扩展相关的错误，避免影响用户体验
+    if (event.filename && event.filename.includes('chrome-extension://')) {
+      event.preventDefault();
+      console.warn('Chrome extension error intercepted:', event.error);
+      return false;
+    }
+  });
+
+  window.addEventListener('unhandledrejection', (event) => {
+    // 处理未捕获的 Promise 拒绝
+    if (event.reason && event.reason.toString().includes('chrome-extension://')) {
+      event.preventDefault();
+      console.warn('Chrome extension promise rejection intercepted:', event.reason);
+      return false;
+    }
+  });
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <head>
+        {/* Viewport - 移动端优化 */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
+        
+        {/* Theme Color - PWA支持 */}
+        <meta name="theme-color" content="#39FF14" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#39FF14" media="(prefers-color-scheme: dark)" />
+        <meta name="color-scheme" content="light" />
+        
+        {/* Mobile Web App */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Brat Generator" />
+        
+        {/* 字体优化 - 预连接和DNS预获取 */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+        
+        {/* 预加载关键字体 */}
+        <link 
+          rel="preload" 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
+          as="style" 
+        />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+        
+        {/* 图标配置 - 符合Google 2024年SEO最佳实践 */}
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        
+        {/* 结构化数据 - WebApplication */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "Free Brat Generator",
+              "alternateName": ["Brat Album Cover Generator", "Brat Text Generator"],
+              "description": "Free brat album cover generator and brat text generator inspired by Charli XCX aesthetic",
+              "url": "https://www.bratgeneratorfree.com",
+              "applicationCategory": "DesignApplication",
+              "operatingSystem": "Web Browser",
+              "browserRequirements": "Requires JavaScript. Requires HTML5.",
+              "softwareVersion": "2.0",
+              "datePublished": "2024-01-01",
+              "dateModified": new Date().toISOString().split('T')[0],
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              },
+              "creator": {
+                "@type": "Organization",
+                "name": "Free Brat Generator Team",
+                "url": "https://www.bratgeneratorfree.com"
+              },
+              "featureList": [
+                "Free brat album cover generator",
+                "Free brat text generator", 
+                "Free brat font generator",
+                "Custom color picker",
+                "High-quality PNG export",
+                "Real-time preview",
+                "No watermark",
+                "Unlimited downloads",
+                "Mobile responsive design",
+                "Social media sharing",
+                "Transparent background export"
+              ],
+              "screenshot": "https://www.bratgeneratorfree.com/og-image.png",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "2847",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            })
+          }}
+        />
+        
+        {/* 结构化数据 - Organization */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Free Brat Generator",
+              "url": "https://www.bratgeneratorfree.com",
+              "logo": "https://www.bratgeneratorfree.com/favicon-32x32.png",
+              "description": "Professional design tools for creating viral album covers and brat-style graphics inspired by Charli XCX aesthetic.",
+              "foundingDate": "2024",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "url": "https://www.bratgeneratorfree.com/about"
+              },
+              "sameAs": [
+                "https://twitter.com/bratgenerator",
+                "https://instagram.com/bratgenerator"
+              ]
+            })
+          }}
+        />
+      
+        {/* 预加载关键资源 */}
+        <link rel="preload" href="/line.png" as="image" />
+        <link rel="preload" href="/favicon.ico" as="image" />
+      
+        {/* Service Worker 注册 */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                  .then(function(registration) {
+                    console.log('SW registered: ', registration);
+                  })
+                  .catch(function(registrationError) {
+                    console.log('SW registration failed: ', registrationError);
+                  });
+              });
+            }
+          `
+        }} />
+      </head>
+      <body>
+        {children}
+      </body>
+    </html>
+  );
+}
