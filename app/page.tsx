@@ -189,7 +189,7 @@ export default function Home() {
       // 保存用于分享的图片URL
       setLastGeneratedImageUrl(shareableImageUrl);
       
-      toast.success(`${format.toUpperCase()} 图片下载成功！已保存到下载文件夹`, {
+      toast.success(`${format.toUpperCase()} image downloaded successfully! Saved to downloads folder`, {
         position: "top-center",
         duration: 4000,
       });
@@ -198,26 +198,26 @@ export default function Home() {
       console.error('Download failed:', error);
       
       // 错误处理
-      let errorMessage = '下载失败: ';
+      let errorMessage = 'Download failed: ';
       let suggestion = '';
       
       if (error instanceof Error) {
         if (error.message.includes('tainted') || error.message.includes('CORS')) {
-          errorMessage += '图片安全限制';
-          suggestion = '请确保网络连接正常';
+          errorMessage += 'Image security restriction';
+          suggestion = 'Please ensure network connection is stable';
         } else if (error.message.includes('fonts')) {
-          errorMessage += '字体加载失败';
-          suggestion = '请刷新页面重试';
+          errorMessage += 'Font loading failed';
+          suggestion = 'Please refresh the page and try again';
         } else if (error.message.includes('element')) {
-          errorMessage += '预览元素未找到';
-          suggestion = '请刷新页面重试';
+          errorMessage += 'Preview element not found';
+          suggestion = 'Please refresh the page and try again';
         } else {
-          errorMessage += '未知错误';
-          suggestion = '请尝试刷新页面';
+          errorMessage += 'Unknown error';
+          suggestion = 'Please try refreshing the page';
         }
       } else {
-        errorMessage += '系统错误';
-        suggestion = '请联系技术支持';
+        errorMessage += 'System error';
+        suggestion = 'Please contact technical support';
       }
       
       toast.error(`${errorMessage}. ${suggestion}`, {
@@ -227,7 +227,7 @@ export default function Home() {
       
       // 提供备用方案
       setTimeout(() => {
-        toast('💡 备用方案：您可以右键点击预览图片选择"图片另存为"', {
+        toast('💡 Alternative: You can right-click the preview image and select "Save image as"', {
           position: "top-center",
           duration: 8000,
         });
@@ -353,34 +353,38 @@ export default function Home() {
                 <div className="space-y-6">
                   {/* Multi-line Text Input */}
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label htmlFor="album-title-input" className="block text-sm font-medium text-slate-700 mb-2">
                       Album Title (Multi-line Support)
                     </label>
                     <textarea
+                      id="album-title-input"
                       value={config.text}
                       onChange={handleTextareaChange}
                       placeholder="Enter your text...&#10;Multi-line supported"
                       className="w-full min-h-[120px] max-h-[200px] px-3 py-3 text-lg border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent resize-vertical overflow-y-auto"
                       maxLength={100}
                       rows={4}
+                      aria-describedby="album-title-help"
                     />
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p id="album-title-help" className="text-xs text-slate-500 mt-1">
                       {config.text.length}/100 characters • Press Enter for new line
                     </p>
                   </div>
 
                   {/* Font Size */}
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label htmlFor="font-size-slider" className="block text-sm font-medium text-slate-700 mb-2">
                       Font Size: {config.fontSize}px
                     </label>
                     <input
+                      id="font-size-slider"
                       type="range"
                       min="24"
                       max="120"
                       value={config.fontSize}
                       onChange={(e) => setConfig(prev => ({...prev, fontSize: Number(e.target.value)}))}
                       className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+                      aria-label={`Font size: ${config.fontSize} pixels`}
                     />
                   </div>
 
@@ -429,10 +433,11 @@ export default function Home() {
                       </Button>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">
+                        <label htmlFor="blur-effect-slider" className="block text-sm font-medium text-slate-700 mb-2">
                           Blur Effect: {config.blurAmount}px
                         </label>
                         <input
+                          id="blur-effect-slider"
                           type="range"
                           min="0"
                           max="10"
@@ -440,6 +445,7 @@ export default function Home() {
                           value={config.blurAmount}
                           onChange={(e) => setConfig(prev => ({...prev, blurAmount: Number(e.target.value)}))}
                           className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+                          aria-label={`Blur effect: ${config.blurAmount} pixels`}
                         />
                       </div>
                       
@@ -493,7 +499,9 @@ export default function Home() {
                           className={`w-12 h-12 rounded-lg border-2 transition-all hover:scale-105 ${className} ${
                             config.bgColor === color && !config.isCustomColor ? 'ring-2 ring-slate-400 ring-offset-2' : ''
                           }`}
-                          title={color}
+                          title={`Select ${color} background color`}
+                          aria-label={`Select ${color} background color${config.bgColor === color && !config.isCustomColor ? ', currently selected' : ''}`}
+                          type="button"
                         />
                       ))}
                     </div>
@@ -501,7 +509,11 @@ export default function Home() {
                     {/* Custom Color Picker */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
+                        <label htmlFor="custom-color-picker" className="sr-only">
+                          Choose custom background color
+                        </label>
                         <input
+                          id="custom-color-picker"
                           type="color"
                           value={config.customColor}
                           onChange={(e) => {
@@ -509,8 +521,13 @@ export default function Home() {
                           }}
                           className="w-12 h-8 rounded border cursor-pointer"
                           title="Choose custom color"
+                          aria-label="Custom background color picker"
                         />
+                        <label htmlFor="custom-color-input" className="sr-only">
+                          Enter custom color hex code
+                        </label>
                         <input
+                          id="custom-color-input"
                           type="text"
                           value={config.customColor}
                           onChange={(e) => {
@@ -525,6 +542,7 @@ export default function Home() {
                           placeholder="#8acf00"
                           className="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
                           maxLength={7}
+                          aria-label="Custom color hex code input"
                         />
                       </div>
                       <p className="text-xs text-slate-500">
@@ -536,18 +554,20 @@ export default function Home() {
                   {/* Border Radius */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <Label className="text-sm font-medium text-slate-700 flex items-center">
+                      <label htmlFor="border-radius-slider" className="text-sm font-medium text-slate-700 flex items-center">
                         <CornerUpRight className="w-4 h-4 mr-1" />
                         Border Radius: {config.borderRadius}px
-                      </Label>
+                      </label>
                     </div>
                     <input
+                      id="border-radius-slider"
                       type="range"
                       min="0"
                       max="50"
                       value={config.borderRadius}
                       onChange={(e) => setConfig(prev => ({...prev, borderRadius: Number(e.target.value)}))}
                       className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+                      aria-label={`Border radius: ${config.borderRadius} pixels`}
                     />
                   </div>
 

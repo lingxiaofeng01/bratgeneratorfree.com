@@ -8,9 +8,6 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
-Max-image-preview: large
-Max-snippet: -1
-Max-video-preview: -1
 
 User-agent: Bingbot
 Allow: /
