@@ -41,7 +41,7 @@ interface BratConfig {
   flipHorizontal: boolean;
   flipVertical: boolean;
   blurAmount: number;
-  scribbleStyle: 'none' | 'texture' | 'destructive';
+  scribbleStyle: 'classic' | 'mirror' | 'texture' | 'scribble';
 }
 
 const defaultConfig: BratConfig = {
@@ -55,7 +55,7 @@ const defaultConfig: BratConfig = {
   flipHorizontal: false,
   flipVertical: false,
   blurAmount: 1.5,
-  scribbleStyle: 'none',
+  scribbleStyle: 'classic',
 };
 
 export default function Home() {
@@ -176,6 +176,13 @@ export default function Home() {
         throw new Error('Preview element not found');
       }
 
+      // 临时隐藏颜色选择器
+      const colorPicker = previewElement.querySelector('.absolute.top-3.left-3') as HTMLElement;
+      const originalDisplay = colorPicker?.style.display;
+      if (colorPicker) {
+        colorPicker.style.display = 'none';
+      }
+
       // 使用ImageExporter进行统一的导出和下载
       const shareableImageUrl = await ImageExporter.exportAndDownload(
         previewElement,
@@ -185,6 +192,11 @@ export default function Home() {
           textAlign: config.textAlign as 'left' | 'center' | 'right'
         }
       );
+
+      // 恢复颜色选择器显示
+      if (colorPicker) {
+        colorPicker.style.display = originalDisplay || '';
+      }
 
       // 保存用于分享的图片URL
       setLastGeneratedImageUrl(shareableImageUrl);
@@ -196,6 +208,13 @@ export default function Home() {
 
     } catch (error) {
       console.error('Download failed:', error);
+      
+      // 确保在错误情况下也恢复颜色选择器显示
+      const previewElement = document.getElementById('brat-preview-area');
+      const colorPicker = previewElement?.querySelector('.absolute.top-3.left-3') as HTMLElement;
+      if (colorPicker) {
+        colorPicker.style.display = '';
+      }
       
       // 错误处理
       let errorMessage = 'Download failed: ';
@@ -257,17 +276,44 @@ export default function Home() {
       ${config.flipVertical ? 'scaleY(-1)' : ''}
     `.trim(),
     lineHeight: debouncedText.includes('\n') ? '0.85' : '0.9',
-    textAlign: config.textAlign as 'left' | 'center' | 'right',
-    color: getCurrentTextColor(),
-    letterSpacing: '-0.08em',
-    fontWeight: '900',
-    fontFamily: '"Helvetica Inserat", "Arial Black", "Arial Black Condensed", "Impact", "Arial Rounded MT Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    transition: 'filter 0.2s ease-in-out',
+    textAlign: config.scribbleStyle === 'texture' ? 'justify' : (config.scribbleStyle === 'mirror' ? 'right' : (config.textAlign as 'left' | 'center' | 'right')),
+    color: config.scribbleStyle === 'texture' ? '#000000' : getCurrentTextColor(),
+    letterSpacing: config.scribbleStyle === 'mirror' ? '-0.05em' : '-0.08em',
+    fontWeight: config.scribbleStyle === 'mirror' ? '400' : '900',
+    fontFamily: config.scribbleStyle === 'mirror' 
+      ? '"Helvetica Neue", "Arial", "Segoe UI", Roboto, sans-serif'
+      : config.scribbleStyle === 'texture'
+      ? '"Helvetica Neue", "Arial", "Segoe UI", Roboto, sans-serif'
+      : '"Helvetica Inserat", "Arial Black", "Arial Black Condensed", "Impact", "Arial Rounded MT Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    transition: 'filter 0.2s ease-in-out, transform 0.3s ease-in-out',
     filter: config.blurAmount > 0 
       ? `blur(${config.blurAmount}px) contrast(1.3) saturate(1.0)` 
       : 'none',
     imageRendering: 'pixelated',
+    ...(config.scribbleStyle === 'texture' && {
+      color: '#000000',
+      textAlign: 'justify',
+      textAlignLast: 'left',
+      wordSpacing: '0.1em',
+      lineHeight: '1.1',
+      fontWeight: '400',
+      textShadow: 'none',
+      opacity: 1,
+    }),
   };
+
+  // 处理镜像文字内容
+  const getMirrorText = (text: string) => {
+    return text.split('\n').map(line => 
+      line.split(' ').map(word => 
+        word.split('').reverse().join('')
+      ).join(' ')
+    ).join('\n');
+  };
+
+  const displayText = config.scribbleStyle === 'mirror' 
+    ? getMirrorText((debouncedText || 'brat').toLowerCase())
+    : (debouncedText || 'brat').toLowerCase();
 
   // 移除频繁的调试日志输出
   // 如需调试，可以取消注释下面的代码
@@ -291,7 +337,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-lime-50 via-white to-lime-100">
       <Toaster />
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
@@ -305,6 +351,16 @@ export default function Home() {
               <Link href="/" className="text-slate-900 font-medium">
                 HOME
               </Link>
+              <a 
+                href="#how-to-use" 
+                className="text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('how-to-use')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                How to Use
+              </a>
               <Link 
                 href="/blog" 
                 className="text-slate-600 hover:text-slate-900 transition-colors"
@@ -330,7 +386,8 @@ export default function Home() {
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
             Design stunning brat album cover artwork inspired by Charli XCX's iconic aesthetic. 
-            Our brat text generator makes it easy to create professional covers instantly with authentic blur effects.
+            Our generator makes it easy to create professional covers instantly with authentic blur effects. 
+            This powerful tool offers unlimited customization for your creative projects.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-500">
             <span className="flex items-center"><Users className="w-4 h-4 mr-1" /> 50,000+ Users</span>
@@ -347,7 +404,7 @@ export default function Home() {
               <Card className="p-6 shadow-lg">
                 <h3 className="text-2xl font-semibold mb-6 flex items-center">
                   <Type className="w-6 h-6 mr-2 text-lime-500" />
-                  Customization
+                  Customization Panel
                 </h3>
                 
                 <div className="space-y-6">
@@ -452,102 +509,39 @@ export default function Home() {
                       {/* Scribble Style Picker */}
                       <div className="pt-2">
                         <label className="block text-sm font-medium text-slate-700 mb-2">
-                          Scribble Style
+                          Text Style Presets
                         </label>
-                        <div className="flex gap-2">
+                        <div className="grid grid-cols-2 gap-2">
                           <Button
-                            variant={config.scribbleStyle === 'none' ? 'default' : 'outline'}
-                            onClick={() => setConfig(prev => ({...prev, scribbleStyle: 'none'}))}
-                            className={`flex-1 ${config.scribbleStyle === 'none' ? "bg-lime-500 hover:bg-lime-600 text-black" : ""}`}
+                            variant={config.scribbleStyle === 'classic' ? 'default' : 'outline'}
+                            onClick={() => setConfig(prev => ({...prev, scribbleStyle: 'classic'}))}
+                            className={`${config.scribbleStyle === 'classic' ? "bg-lime-500 hover:bg-lime-600 text-black" : ""}`}
                           >
-                            Off
+                            Classic
+                          </Button>
+                          <Button
+                            variant={config.scribbleStyle === 'mirror' ? 'default' : 'outline'}
+                            onClick={() => setConfig(prev => ({...prev, scribbleStyle: 'mirror'}))}
+                            className={`${config.scribbleStyle === 'mirror' ? "bg-lime-500 hover:bg-lime-600 text-black" : ""}`}
+                          >
+                            Mirror
                           </Button>
                           <Button
                             variant={config.scribbleStyle === 'texture' ? 'default' : 'outline'}
                             onClick={() => setConfig(prev => ({...prev, scribbleStyle: 'texture'}))}
-                            className={`flex-1 ${config.scribbleStyle === 'texture' ? "bg-lime-500 hover:bg-lime-600 text-black" : ""}`}
+                            className={`${config.scribbleStyle === 'texture' ? "bg-lime-500 hover:bg-lime-600 text-black" : ""}`}
                           >
-                            Texture
+                            Paper
                           </Button>
                           <Button
-                            variant={config.scribbleStyle === 'destructive' ? 'default' : 'outline'}
-                            onClick={() => setConfig(prev => ({...prev, scribbleStyle: 'destructive'}))}
-                            className={`flex-1 ${config.scribbleStyle === 'destructive' ? "bg-lime-500 hover:bg-lime-600 text-black" : ""}`}
+                            variant={config.scribbleStyle === 'scribble' ? 'default' : 'outline'}
+                            onClick={() => setConfig(prev => ({...prev, scribbleStyle: 'scribble'}))}
+                            className={`${config.scribbleStyle === 'scribble' ? "bg-lime-500 hover:bg-lime-600 text-black" : ""}`}
                           >
-                            Destructive
+                            Scribble
                           </Button>
                         </div>
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Background Color */}
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-3 flex items-center">
-                      <Palette className="w-4 h-4 mr-1" />
-                      Background Color
-                    </label>
-                    
-                    {/* Preset Colors */}
-                    <div className="grid grid-cols-4 gap-2 mb-4">
-                      {Object.entries(backgroundColors).map(([color, className]) => (
-                        <button
-                          key={color}
-                          onClick={() => {
-                            setConfig(prev => ({ ...prev, bgColor: color, isCustomColor: false }));
-                          }}
-                          className={`w-12 h-12 rounded-lg border-2 transition-all hover:scale-105 ${className} ${
-                            config.bgColor === color && !config.isCustomColor ? 'ring-2 ring-slate-400 ring-offset-2' : ''
-                          }`}
-                          title={`Select ${color} background color`}
-                          aria-label={`Select ${color} background color${config.bgColor === color && !config.isCustomColor ? ', currently selected' : ''}`}
-                          type="button"
-                        />
-                      ))}
-                    </div>
-                    
-                    {/* Custom Color Picker */}
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2">
-                        <label htmlFor="custom-color-picker" className="sr-only">
-                          Choose custom background color
-                        </label>
-                        <input
-                          id="custom-color-picker"
-                          type="color"
-                          value={config.customColor}
-                          onChange={(e) => {
-                            setConfig(prev => ({...prev, customColor: e.target.value, isCustomColor: true, bgColor: 'custom'}));
-                          }}
-                          className="w-12 h-8 rounded border cursor-pointer"
-                          title="Choose custom color"
-                          aria-label="Custom background color picker"
-                        />
-                        <label htmlFor="custom-color-input" className="sr-only">
-                          Enter custom color hex code
-                        </label>
-                        <input
-                          id="custom-color-input"
-                          type="text"
-                          value={config.customColor}
-                          onChange={(e) => {
-                            const value = e.target.value;
-                            if (/^#[0-9A-Fa-f]{0,7}$/.test(value)) {
-                              setConfig(prev => ({...prev, customColor: value}));
-                              if (value.length === 7) {
-                                setConfig(prev => ({...prev, isCustomColor: true, bgColor: 'custom'}));
-                              }
-                            }
-                          }}
-                          placeholder="#8acf00"
-                          className="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
-                          maxLength={7}
-                          aria-label="Custom color hex code input"
-                        />
-                      </div>
-                      <p className="text-xs text-slate-500">
-                        Enter hex color code (e.g., #8acf00) or use the color picker
-                      </p>
                     </div>
                   </div>
 
@@ -702,7 +696,8 @@ export default function Home() {
                   id="brat-preview-area"
                     className={`
                     relative w-full aspect-square flex items-center 
-                    ${config.textAlign === 'left' ? 'justify-start' : config.textAlign === 'right' ? 'justify-end' : 'justify-center'}
+                    ${config.scribbleStyle === 'mirror' ? 'justify-end' : 
+                      (config.textAlign === 'left' ? 'justify-start' : config.textAlign === 'right' ? 'justify-end' : 'justify-center')}
                     transition-all duration-200 overflow-hidden
                     `}
                     style={{
@@ -720,22 +715,70 @@ export default function Home() {
                       }[config.bgColor] || '#8acf00'
                     ),
                     ...(config.scribbleStyle === 'texture' && {
-                      backgroundImage: 'url(/line.png)',
-                      backgroundRepeat: 'repeat',
-                      backgroundSize: 'auto',
+                      backgroundColor: '#ffffff',
+                      backgroundImage: `
+                        linear-gradient(0deg, rgba(0,0,0,0.02) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px)
+                      `,
+                      backgroundSize: '20px 20px',
+                      filter: 'contrast(1.0) brightness(1.0)',
                     }),
                     }}
                   >
                   {/* Scribble Overlay for 'destructive' style */}
-                  {config.scribbleStyle === 'destructive' && <ScribbleOverlay />}
+                  {config.scribbleStyle === 'scribble' && <ScribbleOverlay />}
+
+                  {/* Floating Color Picker - Top Left */}
+                  <div className="absolute top-3 left-3 flex gap-2 p-2 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg z-10">
+                    {/* Main 4 Colors */}
+                    {[
+                      { color: 'lime', bg: '#8acf00', name: 'Classic Green' },
+                      { color: 'white', bg: '#ffffff', name: 'Pure White' },
+                      { color: 'black', bg: '#000000', name: 'Pure Black' },
+                      { color: 'pink', bg: '#f472b6', name: 'Pink' }
+                    ].map(({ color, bg, name }) => (
+                      <button
+                        key={color}
+                        onClick={() => {
+                          setConfig(prev => ({ ...prev, bgColor: color, isCustomColor: false }));
+                        }}
+                        className={`w-6 h-6 rounded-full border-2 transition-all hover:scale-110 shadow-sm ${
+                          config.bgColor === color && !config.isCustomColor 
+                            ? 'ring-2 ring-slate-600 ring-offset-1 scale-110' 
+                            : 'hover:shadow-md'
+                        }`}
+                        style={{ backgroundColor: bg, borderColor: bg === '#ffffff' ? '#e2e8f0' : bg }}
+                        title={name}
+                        aria-label={`Select ${name} background color${config.bgColor === color && !config.isCustomColor ? ', currently selected' : ''}`}
+                      />
+                    ))}
+                    
+                    {/* Custom Color */}
+                    <input
+                      type="color"
+                      value={config.customColor}
+                      onChange={(e) => {
+                        setConfig(prev => ({...prev, customColor: e.target.value, isCustomColor: true, bgColor: 'custom'}));
+                      }}
+                      className={`w-6 h-6 rounded-full border-2 cursor-pointer transition-all hover:scale-110 shadow-sm ${
+                        config.isCustomColor && config.bgColor === 'custom'
+                          ? 'ring-2 ring-slate-600 ring-offset-1 scale-110'
+                          : 'hover:shadow-md'
+                      }`}
+                      style={{ borderColor: config.customColor }}
+                      title="Custom Color"
+                      aria-label={`Custom background color${config.isCustomColor && config.bgColor === 'custom' ? ', currently selected' : ''}`}
+                    />
+                  </div>
 
                     <div 
                     className="font-black px-4 leading-tight whitespace-pre-line"
                       style={textStyle}
                     >
-                      {(debouncedText || 'brat').toLowerCase()}
+                      {displayText}
                   </div>
                 </div>
+                
                 <p className="text-center text-sm text-slate-500 mt-4">
                   1200 × 1200 px high-quality download. Perfect for social media.
                 </p>
@@ -753,6 +796,103 @@ export default function Home() {
           </div>
         </section>
 
+        {/* How to Use Section */}
+        <section id="how-to-use" className="mb-24">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-slate-900 mb-4">
+              How to Use Our Brat Generator
+            </h3>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Create stunning brat album covers in just 4 simple steps with our powerful design tool. 
+              Follow this comprehensive guide to master every feature.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow border-t-4 border-lime-500">
+              <div className="w-16 h-16 bg-lime-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Type className="w-8 h-8 text-lime-600" />
+              </div>
+              <div className="w-8 h-8 bg-lime-500 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">
+                1
+              </div>
+              <h4 className="text-xl font-semibold mb-3">Enter Your Text</h4>
+              <p className="text-slate-600">
+                Type your album title or any text you want. Our tool supports multi-line input for creative layouts with unlimited possibilities.
+              </p>
+            </Card>
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow border-t-4 border-blue-500">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Palette className="w-8 h-8 text-blue-600" />
+              </div>
+              <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">
+                2
+              </div>
+              <h4 className="text-xl font-semibold mb-3">Choose Colors & Style</h4>
+              <p className="text-slate-600">
+                Select from our preset colors or use custom colors. Pick from Classic, Mirror, Paper, or Scribble text style presets.
+              </p>
+            </Card>
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow border-t-4 border-purple-500">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Sparkles className="w-8 h-8 text-purple-600" />
+              </div>
+              <div className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">
+                3
+              </div>
+              <h4 className="text-xl font-semibold mb-3">Customize Effects</h4>
+              <p className="text-slate-600">
+                Adjust font size, text alignment, blur effects, and border radius. Real-time preview of all changes for perfect results.
+              </p>
+            </Card>
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow border-t-4 border-pink-500">
+              <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Download className="w-8 h-8 text-pink-600" />
+              </div>
+              <div className="w-8 h-8 bg-pink-500 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">
+                4
+              </div>
+              <h4 className="text-xl font-semibold mb-3">Download & Share</h4>
+              <p className="text-slate-600">
+                Download your creation in high-quality PNG, JPEG, or SVG format. Perfect for social media, streaming platforms, and print.
+              </p>
+            </Card>
+          </div>
+          
+          {/* Additional Tips */}
+          <div className="mt-12 max-w-4xl mx-auto">
+            <Card className="p-8 bg-gradient-to-br from-slate-50 to-slate-100">
+              <div className="flex items-start space-x-4">
+                <BookOpen className="w-8 h-8 text-lime-600 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="text-xl font-semibold text-slate-900 mb-4">
+                    Pro Design Tips
+                  </h4>
+                  <div className="grid md:grid-cols-2 gap-6 text-slate-600">
+                    <div>
+                      <h5 className="font-semibold text-slate-800 mb-2">✨ Style Presets</h5>
+                      <ul className="space-y-1 text-sm">
+                        <li>• <strong>Classic:</strong> Bold black text with authentic blur effect</li>
+                        <li>• <strong>Mirror:</strong> Reversed text with right alignment</li>
+                        <li>• <strong>Paper:</strong> Clean text on white paper texture</li>
+                        <li>• <strong>Scribble:</strong> Artistic overlay with hand-drawn lines</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-slate-800 mb-2">🎨 Design Tips</h5>
+                      <ul className="space-y-1 text-sm">
+                        <li>• Use lowercase text for authentic brat aesthetic</li>
+                        <li>• Try multi-line layouts for longer album titles</li>
+                        <li>• Experiment with different color combinations</li>
+                        <li>• Adjust blur for the perfect Charli XCX vibe</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+
         {/* Features Section */}
         <section className="mb-24">
           <div className="text-center mb-12">
@@ -760,7 +900,8 @@ export default function Home() {
               Why Choose Our Brat Generator?
             </h3>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              The most powerful brat album cover generator with advanced text features
+              The most powerful design tool with advanced features for creating professional album covers. 
+              Stand out as the best choice for creators worldwide.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -770,7 +911,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-2">Instant Generation</h4>
               <p className="text-slate-600">
-                Create professional-looking brat album covers in seconds with real-time preview
+                Create professional-looking brat album covers in seconds with real-time preview using advanced technology
               </p>
             </Card>
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
@@ -779,7 +920,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-2">Advanced Customization</h4>
               <p className="text-slate-600">
-                Choose from multiple color combinations and typography options with our tools
+                Choose from multiple color combinations and typography options with comprehensive tools and features
               </p>
             </Card>
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
@@ -788,7 +929,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-2">High-Quality Export</h4>
               <p className="text-slate-600">
-                Download your creations in high-resolution PNG format, perfect for any platform
+                Download your creations in high-resolution PNG format, perfect for any platform with professional results
               </p>
             </Card>
           </div>
@@ -863,7 +1004,7 @@ export default function Home() {
               Frequently Asked Questions
             </h3>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Everything you need to know about our brat generator tool
+              Everything you need to know about our design tool and how to use it effectively
             </p>
           </div>
           <div className="max-w-3xl mx-auto space-y-6">
@@ -876,7 +1017,7 @@ export default function Home() {
                   </h4>
                   <p className="text-slate-600">
                     A brat generator is a design tool that creates album covers inspired by Charli XCX's iconic "brat" aesthetic. 
-                    Our tool allows you to create custom designs with bold typography and vibrant colors.
+                    Our tool allows you to create custom designs with bold typography and vibrant colors using advanced features.
                   </p>
                 </div>
               </div>
@@ -886,10 +1027,10 @@ export default function Home() {
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">
-                    How does the text generator work?
+                    How does the tool work?
                   </h4>
                   <p className="text-slate-600">
-                    Our text generator uses advanced typography rendering to create bold, impactful text designs. 
+                    Our tool uses advanced typography rendering to create bold, impactful text designs. 
                     Simply enter your text, choose colors and effects, and download your custom creation.
                   </p>
                 </div>
@@ -900,10 +1041,10 @@ export default function Home() {
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">
-                    Can I use the generated covers for commercial purposes?
+                    Can I use designs for commercial purposes?
                   </h4>
                   <p className="text-slate-600">
-                    Yes! All designs created with our generator are free to use for personal and commercial projects. 
+                    Yes! All designs created with our tool are free to use for personal and commercial projects. 
                     Create album covers, social media posts, merchandise, and more with no restrictions.
                   </p>
                 </div>
@@ -914,11 +1055,11 @@ export default function Home() {
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">
-                    What format does the generator export?
+                    What format does the tool export?
                   </h4>
                   <p className="text-slate-600">
-                    Our generator exports high-quality PNG files at 1200x1200 pixels, perfect for social media, 
-                    streaming platforms, and print applications. The format ensures crisp, professional results.
+                    Our tool exports high-quality PNG files at 1200x1200 pixels, perfect for social media, 
+                    streaming platforms, and print applications. The export format ensures crisp, professional results.
                   </p>
                 </div>
               </div>
@@ -932,7 +1073,8 @@ export default function Home() {
             Ready to Create Your Masterpiece?
           </h3>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of artists using our generator to create stunning designs
+            Join thousands of artists using our tool to create stunning designs. 
+            Start creating with the best brat generator today!
           </p>
           <Button 
             size="lg" 
@@ -954,7 +1096,8 @@ export default function Home() {
                 <h4 className="text-xl font-bold">Brat Generator</h4>
               </div>
               <p className="text-slate-400 mb-4">
-                The ultimate tool for creating stunning designs inspired by Charli XCX's iconic aesthetic.
+                The ultimate design tool for creating stunning artwork inspired by Charli XCX's iconic aesthetic. 
+                Our professional brat generator offers unlimited creative possibilities.
               </p>
             </div>
             <div>
@@ -989,6 +1132,18 @@ export default function Home() {
             <div>
               <h5 className="font-semibold mb-4">Resources</h5>
               <ul className="space-y-2 text-slate-400">
+                <li>
+                  <a 
+                    href="#how-to-use" 
+                    className="hover:text-white transition-colors cursor-pointer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById('how-to-use')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    How to Use
+                  </a>
+                </li>
                 <li>
                   <Link 
                     href="/blog" 
@@ -1038,7 +1193,8 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400">
-            <p>&copy; 2024 Brat Generator. All rights reserved. Create stunning brat album covers with our free text generator.</p>
+            <p>&copy; 2025 Brat Generator. All rights reserved. Create stunning brat album covers with our free brat generator. 
+            The best brat generator for professional design results.</p>
           </div>
         </div>
       </footer>

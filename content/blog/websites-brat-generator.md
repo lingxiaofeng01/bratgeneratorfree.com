@@ -16,7 +16,7 @@ Looking to ride the wave of the **Brat summer aesthetic**? Whether you're crafti
 
 ## 🌟 What is a Brat Generator?
 
-A **Brat Generator** is a web-based tool that lets you recreate the visual aesthetic of the *Brat* era — especially inspired by Charli XCX's iconic 2024 album *BRAT*. These tools usually:
+A **Brat Generator** is a web-based tool that lets you recreate the visual aesthetic of the *Brat* era — especially inspired by Charli XCX's iconic 2025 album *BRAT*. These tools usually:
 
 - Apply the trademark **green (#7BF850 or Pantone 3507C)** background
 - Use **bold sans-serif fonts** like Arial or Helvetica
@@ -96,7 +96,7 @@ When choosing a Brat Generator tool, consider the following:
 
 ## 📈 SEO Trend: Why "Brat Generator" is Blowing Up
 
-The keyword **"brat generator"** has seen explosive growth since mid-2024, fueled by TikTok trends and Charli XCX fans. Long-tail variants like:
+The keyword **"brat generator"** has seen explosive growth since mid-2025, fueled by TikTok trends and Charli XCX fans. Long-tail variants like:
 
 - "brat text generator"
 - "brat meme maker"

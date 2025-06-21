@@ -18,7 +18,7 @@ If you're on TikTok, you've probably seen the *Brat aesthetic* everywhere — lo
 
 ## 💡 What Is a Brat Text Generator?
 
-A **Brat generator** is a tool that mimics the visual style of Charli XCX's 2024 album *BRAT*. It usually includes:
+A **Brat generator** is a tool that mimics the visual style of Charli XCX's 2025 album *BRAT*. It usually includes:
 
 - Lowercase text with a rebellious tone
 - Bold sans-serif fonts like **Arial**, **Helvetica Neue**
@@ -128,7 +128,7 @@ Just search "brat green" templates or start from scratch.
 
 ## 📈 Why This Is Trending
 
-Searches for **"brat text generator TikTok"** have spiked since early 2024. Creators want tools that:
+Searches for **"brat text generator TikTok"** have spiked since early 2025. Creators want tools that:
 
 - Work fast on mobile
 - Allow transparent PNG export

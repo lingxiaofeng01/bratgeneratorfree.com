@@ -142,7 +142,7 @@ export default function RootLayout({
           `
         }} />
         
-        {/* 图标配置 - 符合Google 2024年SEO最佳实践 */}
+        {/* 图标配置 - 符合Google 2025年SEO最佳实践 */}
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -167,7 +167,7 @@ export default function RootLayout({
               "operatingSystem": "Web Browser",
               "browserRequirements": "Requires JavaScript. Requires HTML5.",
               "softwareVersion": "2.0",
-              "datePublished": "2024-01-01",
+              "datePublished": "2025-01-01",
               "dateModified": new Date().toISOString().split('T')[0],
               "offers": {
                 "@type": "Offer",
@@ -216,7 +216,7 @@ export default function RootLayout({
               "url": "https://www.bratgeneratorfree.com",
               "logo": "https://www.bratgeneratorfree.com/favicon-32x32.png",
               "description": "Professional design tools for creating viral album covers and brat-style graphics inspired by Charli XCX aesthetic.",
-              "foundingDate": "2024",
+              "foundingDate": "2025",
               "contactPoint": {
                 "@type": "ContactPoint",
                 "contactType": "customer service",

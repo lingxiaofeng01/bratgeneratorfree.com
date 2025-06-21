@@ -232,7 +232,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   fill
                   sizes="100vw"
                   className="object-cover rounded-lg shadow-lg"
-                  priority />
+                  priority
+                />
               </div>
 
               {/* 文章内容 */}

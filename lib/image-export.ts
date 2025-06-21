@@ -34,7 +34,7 @@ export interface BratConfig {
   flipHorizontal: boolean;
   flipVertical: boolean;
   blurAmount: number;
-  scribbleStyle?: string;
+  scribbleStyle?: 'classic' | 'mirror' | 'texture' | 'scribble';
 }
 
 export type ExportFormat = 'png' | 'jpeg' | 'svg' | 'blob';
@@ -86,13 +86,7 @@ export class ImageExporter {
       height: options.height,
       style: options.style || defaultOpts.style,
       cacheBust: options.cacheBust !== undefined ? options.cacheBust : defaultOpts.cacheBust,
-      // 确保字体被正确嵌入
-      fontEmbedCSS: `
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
-        * {
-          font-family: "Helvetica Inserat", "Arial Black", "Arial Black Condensed", "Impact", "Arial Rounded MT Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-        }
-      `,
+      // 移除强制字体嵌入，让预设样式的字体设置生效
     };
 
     // 临时应用样式以确保渲染一致性
@@ -178,19 +172,8 @@ export class ImageExporter {
       });
     }
 
-    // 处理字体样式
-    const textElements = element.querySelectorAll('*');
-    textElements.forEach((el) => {
-      const htmlEl = el as HTMLElement;
-      const computedStyle = window.getComputedStyle(htmlEl);
-      
-      // 确保字体渲染一致
-      if (computedStyle.fontFamily) {
-        originalStyles.set(htmlEl, htmlEl.style.cssText);
-        htmlEl.style.fontFamily = '"Helvetica Inserat", "Arial Black", "Arial Black Condensed", "Impact", "Arial Rounded MT Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
-      }
-    });
-
+    // 不再强制覆盖字体样式，让预设样式生效
+    // 只处理字体加载确保，不改变字体族
     return originalStyles;
   }
 
@@ -269,19 +252,117 @@ export class ImageExporter {
     config: BratConfig,
     options: ExportOptions = {}
   ): Promise<string> {
-    // 设置背景色
-    const backgroundColor = config.isCustomColor ? config.customColor : 
-      config.bgColor === 'lime' ? '#8acf00' : '#ffffff';
+    // 设置背景色 - 根据预设样式决定
+    let backgroundColor: string;
+    if (config.scribbleStyle === 'texture') {
+      // Paper模式强制白色背景
+      backgroundColor = '#ffffff';
+    } else {
+      // 其他模式使用用户选择的颜色
+      backgroundColor = config.isCustomColor && config.customColor ? config.customColor : 
+        ({
+          lime: '#8acf00',
+          white: '#ffffff', 
+          black: '#000000',
+          pink: '#f472b6',
+          blue: '#60a5fa',
+          purple: '#a78bfa',
+          orange: '#fb923c',
+          red: '#f87171',
+        }[config.bgColor] || '#8acf00');
+    }
 
     const mergedOptions: ExportOptions = {
       ...options,
       backgroundColor,
+      // 在导出选项中也添加圆角样式
+      style: {
+        ...options.style,
+        borderRadius: `${config.borderRadius}px`,
+        overflow: 'hidden',
+        WebkitBorderRadius: `${config.borderRadius}px`,
+        MozBorderRadius: `${config.borderRadius}px`,
+        // 根据预设样式添加特殊背景效果
+        ...(config.scribbleStyle === 'texture' && {
+          backgroundImage: `
+            linear-gradient(0deg, rgba(0,0,0,0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px)
+          `,
+          backgroundSize: '20px 20px',
+          filter: 'contrast(1.0) brightness(1.0)',
+        }),
+      }
     };
 
-    // 在导出前应用模糊效果到元素上
+    // 在导出前应用样式到元素上
     const originalFilter = element.style.filter;
+    const originalBorderRadius = element.style.borderRadius;
+    const originalOverflow = element.style.overflow;
+    const originalBackgroundImage = element.style.backgroundImage;
+    const originalBackgroundSize = element.style.backgroundSize;
+    
+    // 处理Mirror模式的文字内容
+    let originalTextContent: string | null = null;
+    let originalFontFamily: string = '';
+    let originalFontWeight: string = '';
+    let originalTextAlign: string = '';
+    
+    if (config.scribbleStyle === 'mirror') {
+      const textElement = element.querySelector('.font-black') as HTMLElement;
+      if (textElement) {
+        originalTextContent = textElement.textContent;
+        originalFontFamily = textElement.style.fontFamily;
+        originalFontWeight = textElement.style.fontWeight;
+        originalTextAlign = textElement.style.textAlign;
+        
+        // 应用字母反转效果
+        const mirrorText = (config.text || '').split('\n').map(line => 
+          line.split(' ').map(word => 
+            word.split('').reverse().join('')
+          ).join(' ')
+        ).join('\n').toLowerCase();
+        textElement.textContent = mirrorText;
+        
+        // 应用Mirror模式的字体样式
+        textElement.style.fontFamily = '"Helvetica Neue", "Arial", "Segoe UI", Roboto, sans-serif';
+        textElement.style.fontWeight = '400';
+        textElement.style.textAlign = 'right';
+      }
+    } else if (config.scribbleStyle === 'texture') {
+      const textElement = element.querySelector('.font-black') as HTMLElement;
+      if (textElement) {
+        originalFontFamily = textElement.style.fontFamily;
+        originalFontWeight = textElement.style.fontWeight;
+        originalTextAlign = textElement.style.textAlign;
+        
+        // 应用Paper模式的字体样式
+        textElement.style.fontFamily = '"Helvetica Neue", "Arial", "Segoe UI", Roboto, sans-serif';
+        textElement.style.fontWeight = '400';
+        textElement.style.textAlign = 'justify';
+        textElement.style.color = '#000000';
+      }
+    }
+    
+    // 应用模糊效果
     if (config.blurAmount > 0) {
       element.style.filter = `blur(${config.blurAmount}px) contrast(1.3) saturate(1.0)`;
+    }
+    
+    // 应用边框半径
+    if (config.borderRadius > 0) {
+      element.style.borderRadius = `${config.borderRadius}px`;
+      element.style.overflow = 'hidden';
+      element.style.setProperty('-webkit-border-radius', `${config.borderRadius}px`);
+      element.style.setProperty('-moz-border-radius', `${config.borderRadius}px`);
+    }
+
+    // 应用Paper模式的背景纹理
+    if (config.scribbleStyle === 'texture') {
+      element.style.backgroundImage = `
+        linear-gradient(0deg, rgba(0,0,0,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px)
+      `;
+      element.style.backgroundSize = '20px 20px';
     }
 
     try {
@@ -300,8 +381,33 @@ export class ImageExporter {
 
       return imageData as string;
     } finally {
-      // 恢复原始filter
+      // 恢复原始样式
       element.style.filter = originalFilter;
+      element.style.borderRadius = originalBorderRadius;
+      element.style.overflow = originalOverflow;
+      element.style.backgroundImage = originalBackgroundImage;
+      element.style.backgroundSize = originalBackgroundSize;
+      // 清理webkit和moz前缀
+      element.style.removeProperty('-webkit-border-radius');
+      element.style.removeProperty('-moz-border-radius');
+      
+      // 恢复Mirror模式的原始文字内容
+      if (config.scribbleStyle === 'mirror' && originalTextContent !== null) {
+        const textElement = element.querySelector('.font-black') as HTMLElement;
+        if (textElement) {
+          textElement.textContent = originalTextContent;
+          textElement.style.fontFamily = originalFontFamily;
+          textElement.style.fontWeight = originalFontWeight;
+          textElement.style.textAlign = originalTextAlign;
+        }
+      } else if (config.scribbleStyle === 'texture') {
+        const textElement = element.querySelector('.font-black') as HTMLElement;
+        if (textElement) {
+          textElement.style.fontFamily = originalFontFamily;
+          textElement.style.fontWeight = originalFontWeight;
+          textElement.style.textAlign = originalTextAlign;
+        }
+      }
     }
   }
 }

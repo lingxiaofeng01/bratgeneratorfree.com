@@ -24,12 +24,12 @@ export default function AboutPage() {
       description: 'Based on in-depth research of the Charli XCX "brat" aesthetic, development of the first generator prototype began.'
     },
     {
-      year: 'Early 2024',
+      year: 'Early 2025',
       title: 'Public Launch',
       description: 'Brat Generator was officially launched, receiving positive feedback and praise from the design community.'
     },
     {
-      year: 'Mid 2024',
+      year: 'Mid 2025',
       title: 'Feature Expansion',
       description: 'Added support for multi-line text, a custom color picker, and advanced text effects.'
     },
@@ -294,7 +294,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400">
-            <p>&copy; 2024 Brat Generator. All rights reserved.</p>
+            <p>&copy; 2025 Brat Generator. All rights reserved.</p>
           </div>
         </div>
       </footer>

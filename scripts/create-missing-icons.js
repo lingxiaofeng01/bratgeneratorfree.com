@@ -81,7 +81,7 @@ if (missingIcons.length > 0) {
   console.log('\n🎉 所有必需的图标文件都已存在！');
 }
 
-console.log('\n📊 Google SEO图标要求 (2024年最新):');
+console.log('\n📊 Google SEO图标要求 (2025年最新):');
 console.log('• 最小尺寸: 8x8px (不推荐)');
 console.log('• 推荐尺寸: 48x48px 或更大');
 console.log('• 最佳实践: 48x48, 96x96, 144x144, 192x192px');

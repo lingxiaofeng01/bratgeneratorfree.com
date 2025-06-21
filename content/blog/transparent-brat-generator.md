@@ -119,7 +119,7 @@ Here's a quick guide using [Free Brat Generator](https://www.bratgeneratorfree.c
 
 ## 📈 Why This Is Trending
 
-The term **"transparent brat generator"** exploded in search traffic since *Brat* dropped in 2024. Now in 2025, more creators want **clean, shareable assets** for design, memes, and remix culture.
+The term **"transparent brat generator"** exploded in search traffic since *Brat* dropped in 2025. Now in 2025, more creators want **clean, shareable assets** for design, memes, and remix culture.
 
 Long-tail variations gaining traction include:
 
