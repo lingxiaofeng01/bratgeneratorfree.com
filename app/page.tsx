@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
-import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2 } from 'lucide-react';
+import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -60,6 +60,7 @@ const defaultConfig: BratConfig = {
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const [config, setConfig] = useState<BratConfig>(defaultConfig);
 
@@ -67,6 +68,10 @@ export default function Home() {
   const [latestPosts, setLatestPosts] = useState<BlogPost[]>([]);
   const [scribbleImage, setScribbleImage] = useState<HTMLImageElement | null>(null);
   const [lastGeneratedImageUrl, setLastGeneratedImageUrl] = useState<string>('');
+  
+  // 智能布局系统状态
+  const [containerSize, setContainerSize] = useState({ width: 400, height: 400 });
+  const previewRef = useRef<HTMLDivElement>(null);
 
   // Preload scribble image
   useEffect(() => {
@@ -103,9 +108,129 @@ export default function Home() {
     loadPosts();
   }, []); // Runs only once on mount
 
+  // ResizeObserver 监听预览框大小变化
+  useEffect(() => {
+    if (typeof window === 'undefined' || !previewRef.current) return;
+    
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        setContainerSize({ width, height });
+      }
+    });
+    
+    resizeObserver.observe(previewRef.current);
+    
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [isClient]);
+
   // Debounce text and font size from the config state
   const debouncedText = useDebounce(config.text, 300);
   const debouncedFontSize = useDebounce(config.fontSize, 100);
+
+  // 智能布局系统 - 重新设计：基于实际DOM测量的简单有效方案
+  const optimalLayout = useMemo(() => {
+    if (!debouncedText || containerSize.width < 100) {
+      return {
+        fontSize: config.fontSize,
+        lineHeight: 0.9,
+        letterSpacing: '-0.08em',
+        lines: [debouncedText || 'brat'],
+        spaceUtilization: 0,
+        isOptimal: false,
+        userFontSizeRatio: 1
+      };
+    }
+
+    // 简单直接：预留足够的安全边距
+    const SAFETY_MARGIN = 40; // 固定40px安全边距（包含所有padding）
+    const maxWidth = Math.max(100, containerSize.width - SAFETY_MARGIN);
+    const maxHeight = Math.max(100, containerSize.height - SAFETY_MARGIN);
+
+    // 简单的文字宽度估算（更保守）
+    const estimateTextWidth = (text: string, fontSize: number) => {
+      return text.length * fontSize * 0.6; // 保守估算
+    };
+
+    // 简单换行：按空格分割，确保每行都不超过maxWidth
+    const wrapText = (text: string, fontSize: number) => {
+      const words = text.split(' ');
+      const lines = [];
+      let currentLine = '';
+      
+      for (const word of words) {
+        const testLine = currentLine ? `${currentLine} ${word}` : word;
+        const testWidth = estimateTextWidth(testLine, fontSize);
+        
+        if (testWidth <= maxWidth) {
+          currentLine = testLine;
+        } else {
+          if (currentLine) {
+            lines.push(currentLine);
+            currentLine = word;
+          } else {
+            // 单个词太长，强制换行
+            lines.push(word);
+            currentLine = '';
+          }
+        }
+      }
+      
+      if (currentLine) {
+        lines.push(currentLine);
+      }
+      
+      return lines.length > 0 ? lines : [text];
+    };
+
+    // 使用用户设置的字体大小
+    let fontSize = config.fontSize;
+    let lines = wrapText(debouncedText, fontSize);
+    let lineHeight = Math.max(0.85, 1.2 - (lines.length - 1) * 0.05);
+    
+    // 检查是否超出高度限制
+    const totalHeight = lines.length * fontSize * lineHeight;
+    if (totalHeight > maxHeight) {
+      // 如果超出高度，按比例缩小字体
+      const scaleFactor = maxHeight / totalHeight;
+      fontSize = Math.max(12, fontSize * scaleFactor * 0.9); // 再保守10%
+      lines = wrapText(debouncedText, fontSize);
+      lineHeight = Math.max(0.85, 1.2 - (lines.length - 1) * 0.05);
+    }
+
+    // 最终安全检查：确保最长行不超过maxWidth
+    const maxLineWidth = Math.max(...lines.map(line => estimateTextWidth(line, fontSize)));
+    if (maxLineWidth > maxWidth) {
+      const scaleFactor = maxWidth / maxLineWidth;
+      fontSize = Math.max(12, fontSize * scaleFactor * 0.9); // 再保守10%
+      lines = wrapText(debouncedText, fontSize);
+    }
+
+    // 计算空间利用率
+    const finalHeight = lines.length * fontSize * lineHeight;
+    const finalWidth = Math.max(...lines.map(line => estimateTextWidth(line, fontSize)));
+    const spaceUtilization = Math.min(finalWidth / maxWidth, finalHeight / maxHeight);
+
+    return {
+      fontSize: Math.round(fontSize),
+      lineHeight,
+      letterSpacing: lines.length > 2 ? '-0.1em' : '-0.08em',
+      lines,
+      spaceUtilization,
+      isOptimal: spaceUtilization >= 0.5 && spaceUtilization <= 0.8,
+      userFontSizeRatio: fontSize / config.fontSize,
+      debug: {
+        containerSize,
+        maxWidth,
+        maxHeight,
+        finalWidth,
+        finalHeight,
+        spaceUtilization
+      }
+    };
+  }, [debouncedText, config.fontSize, containerSize]);
 
   // Reset to default configuration
   const handleReset = useCallback(() => {
@@ -269,36 +394,41 @@ export default function Home() {
   };
 
   const textStyle: React.CSSProperties = {
-    fontSize: `${debouncedFontSize}px`,
+    fontSize: `${optimalLayout.fontSize}px`,
     transform: `
-      ${debouncedText.length > 12 ? 'scaleX(0.85)' : ''}
       ${config.flipHorizontal ? 'scaleX(-1)' : ''}
       ${config.flipVertical ? 'scaleY(-1)' : ''}
     `.trim(),
-    lineHeight: debouncedText.includes('\n') ? '0.85' : '0.9',
+    lineHeight: optimalLayout.lineHeight,
     textAlign: config.scribbleStyle === 'texture' ? 'justify' : (config.scribbleStyle === 'mirror' ? 'right' : (config.textAlign as 'left' | 'center' | 'right')),
     color: config.scribbleStyle === 'texture' ? '#000000' : getCurrentTextColor(),
-    letterSpacing: config.scribbleStyle === 'mirror' ? '-0.05em' : '-0.08em',
+    letterSpacing: optimalLayout.letterSpacing,
     fontWeight: config.scribbleStyle === 'mirror' ? '400' : '900',
     fontFamily: config.scribbleStyle === 'mirror' 
       ? '"Helvetica Neue", "Arial", "Segoe UI", Roboto, sans-serif'
       : config.scribbleStyle === 'texture'
       ? '"Helvetica Neue", "Arial", "Segoe UI", Roboto, sans-serif'
       : '"Helvetica Inserat", "Arial Black", "Arial Black Condensed", "Impact", "Arial Rounded MT Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    transition: 'filter 0.2s ease-in-out, transform 0.3s ease-in-out',
+    transition: 'font-size 0.3s ease-out, line-height 0.3s ease-out, letter-spacing 0.3s ease-out, filter 0.2s ease-in-out, transform 0.3s ease-in-out',
     filter: config.blurAmount > 0 
       ? `blur(${config.blurAmount}px) contrast(1.3) saturate(1.0)` 
       : 'none',
     imageRendering: 'pixelated',
+    wordWrap: 'break-word',
+    overflowWrap: 'break-word',
+    hyphens: 'auto',
     ...(config.scribbleStyle === 'texture' && {
       color: '#000000',
       textAlign: 'justify',
-      textAlignLast: 'left',
-      wordSpacing: '0.1em',
-      lineHeight: '1.1',
+      textAlignLast: 'justify',
+      wordSpacing: '0.3em',
+      letterSpacing: '0.05em',
+      lineHeight: '1.2',
       fontWeight: '400',
       textShadow: 'none',
       opacity: 1,
+      whiteSpace: 'pre-wrap',
+      textJustify: 'inter-word',
     }),
   };
 
@@ -313,7 +443,9 @@ export default function Home() {
 
   const displayText = config.scribbleStyle === 'mirror' 
     ? getMirrorText((debouncedText || 'brat').toLowerCase())
-    : (debouncedText || 'brat').toLowerCase();
+    : optimalLayout.lines.length > 0 
+      ? optimalLayout.lines.join('\n')
+      : (debouncedText || 'brat').toLowerCase();
 
   // 移除频繁的调试日志输出
   // 如需调试，可以取消注释下面的代码
@@ -343,17 +475,20 @@ export default function Home() {
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <nav className="flex items-center justify-between">
+            {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
               <Sparkles className="w-8 h-8 text-lime-500" />
-              <h1 className="text-2xl font-bold text-slate-900">Brat Generator</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Brat Generator</h1>
             </Link>
-            <div className="flex items-center space-x-6">
-              <Link href="/" className="text-slate-900 font-medium">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-6">
+              <Link href="/" className="text-slate-900 font-medium hover:text-lime-600 transition-colors">
                 HOME
               </Link>
               <a 
                 href="#how-to-use" 
-                className="text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                className="text-slate-600 hover:text-lime-600 transition-colors cursor-pointer"
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('how-to-use')?.scrollIntoView({ behavior: 'smooth' });
@@ -363,36 +498,95 @@ export default function Home() {
               </a>
               <Link 
                 href="/blog" 
-                className="text-slate-600 hover:text-slate-900 transition-colors"
+                className="text-slate-600 hover:text-lime-600 transition-colors"
               >
                 Blog
               </Link>
               <Link 
                 href="/about" 
-                className="text-slate-600 hover:text-slate-900 transition-colors"
+                className="text-slate-600 hover:text-lime-600 transition-colors"
               >
                 About
               </Link>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-slate-600" />
+              ) : (
+                <Menu className="w-6 h-6 text-slate-600" />
+              )}
+            </button>
           </nav>
+
+          {/* Mobile Navigation Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 border-t border-slate-200">
+              <div className="flex flex-col space-y-4 pt-4">
+                <Link 
+                  href="/" 
+                  className="text-slate-900 font-medium hover:text-lime-600 transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  HOME
+                </Link>
+                <a 
+                  href="#how-to-use" 
+                  className="text-slate-600 hover:text-lime-600 transition-colors cursor-pointer py-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMobileMenuOpen(false);
+                    document.getElementById('how-to-use')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  How to Use
+                </a>
+                <Link 
+                  href="/blog" 
+                  className="text-slate-600 hover:text-lime-600 transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Blog
+                </Link>
+                <Link 
+                  href="/about" 
+                  className="text-slate-600 hover:text-lime-600 transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  About
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-12">
         {/* Hero Section */}
-        <section className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-slate-900 mb-4">
+        <section className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
             Create Your Perfect <span className="text-lime-500">Brat</span> Album Cover
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
+          <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
             Design stunning brat album cover artwork inspired by Charli XCX's iconic aesthetic. 
             Our generator makes it easy to create professional covers instantly with authentic blur effects. 
             This powerful tool offers unlimited customization for your creative projects.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-500">
-            <span className="flex items-center"><Users className="w-4 h-4 mr-1" /> 50,000+ Users</span>
-            <span className="flex items-center"><Star className="w-4 h-4 mr-1 text-yellow-500" /> 4.9/5 Rating</span>
-            <span className="flex items-center"><Zap className="w-4 h-4 mr-1" /> Instant Generation</span>
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-sm text-slate-500 px-4">
+            <span className="flex items-center bg-white/50 px-3 py-1 rounded-full">
+              <Users className="w-4 h-4 mr-1" /> 50,000+ Users
+            </span>
+            <span className="flex items-center bg-white/50 px-3 py-1 rounded-full">
+              <Star className="w-4 h-4 mr-1 text-yellow-500" /> 4.9/5 Rating
+            </span>
+            <span className="flex items-center bg-white/50 px-3 py-1 rounded-full">
+              <Zap className="w-4 h-4 mr-1" /> Instant Generation
+            </span>
           </div>
         </section>
 
@@ -430,9 +624,35 @@ export default function Home() {
 
                   {/* Font Size */}
                   <div>
-                    <label htmlFor="font-size-slider" className="block text-sm font-medium text-slate-700 mb-2">
-                      Font Size: {config.fontSize}px
-                    </label>
+                    <div className="flex items-center justify-between mb-2">
+                      <label htmlFor="font-size-slider" className="text-sm font-medium text-slate-700">
+                        Font Size: {config.fontSize}px
+                      </label>
+                      {optimalLayout.userFontSizeRatio && (
+                        <div className="flex items-center text-xs">
+                          <div className={`w-2 h-2 rounded-full mr-1 ${
+                            optimalLayout.isOptimal 
+                              ? 'bg-green-500' 
+                              : optimalLayout.spaceUtilization > 0.4 
+                                ? 'bg-yellow-500' 
+                                : 'bg-red-500'
+                          }`} />
+                          <span className={`${
+                            optimalLayout.isOptimal 
+                              ? 'text-green-600' 
+                              : optimalLayout.spaceUtilization > 0.4 
+                                ? 'text-yellow-600' 
+                                : 'text-red-600'
+                          }`}>
+                            {optimalLayout.isOptimal 
+                              ? 'Optimal Layout' 
+                              : optimalLayout.spaceUtilization > 0.4 
+                                ? 'Good Layout' 
+                                : 'Can Optimize'}
+                          </span>
+                        </div>
+                      )}
+                    </div>
                     <input
                       id="font-size-slider"
                       type="range"
@@ -443,6 +663,20 @@ export default function Home() {
                       className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
                       aria-label={`Font size: ${config.fontSize} pixels`}
                     />
+                    {optimalLayout.userFontSizeRatio && (
+                      <div className="flex justify-between text-xs text-slate-500 mt-1">
+                        <span>Actual: {optimalLayout.fontSize}px</span>
+                        <span>Utilization: {Math.round(optimalLayout.spaceUtilization * 100)}%</span>
+                        <span>
+                          {optimalLayout.userFontSizeRatio > 1 
+                            ? `↑${Math.round((optimalLayout.userFontSizeRatio - 1) * 100)}%` 
+                            : optimalLayout.userFontSizeRatio < 1 
+                              ? `↓${Math.round((1 - optimalLayout.userFontSizeRatio) * 100)}%`
+                              : '='
+                          }
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Text Alignment */}
@@ -684,16 +918,21 @@ export default function Home() {
                   <li>• Adjust border radius for modern rounded or classic sharp edges</li>
                   <li>• Perfect for social media, playlist covers, and more</li>
                   <li>• Lowercase text follows the original "brat" aesthetic style</li>
+                  <li>• <strong>Smart Layout:</strong> System automatically adjusts font size to prevent overflow</li>
+                  <li>• Green indicator shows optimal layout, yellow for good, red for optimization needed</li>
+                  <li>• <strong>Safety Design:</strong> 40px safety margin ensures text never overflows boundaries</li>
+                  <li>• Supports automatic line wrapping and font scaling, adapts to all screen sizes</li>
                 </ul>
               </Card>
             </div>
 
             {/* Preview Area */}
             <div className="order-1 lg:order-2 lg:sticky lg:top-24">
-              <Card className="p-6 shadow-xl">
+              <Card className="p-3 sm:p-4 md:p-6 shadow-xl">
                 <h3 className="text-xl font-semibold mb-4 text-center">Live Preview</h3>
                   <div 
                   id="brat-preview-area"
+                  ref={previewRef}
                     className={`
                     relative w-full aspect-square flex items-center 
                     ${config.scribbleStyle === 'mirror' ? 'justify-end' : 
@@ -754,25 +993,34 @@ export default function Home() {
                     ))}
                     
                     {/* Custom Color */}
-                    <input
-                      type="color"
-                      value={config.customColor}
-                      onChange={(e) => {
-                        setConfig(prev => ({...prev, customColor: e.target.value, isCustomColor: true, bgColor: 'custom'}));
-                      }}
-                      className={`w-6 h-6 rounded-full border-2 cursor-pointer transition-all hover:scale-110 shadow-sm ${
-                        config.isCustomColor && config.bgColor === 'custom'
-                          ? 'ring-2 ring-slate-600 ring-offset-1 scale-110'
-                          : 'hover:shadow-md'
-                      }`}
-                      style={{ borderColor: config.customColor }}
-                      title="Custom Color"
-                      aria-label={`Custom background color${config.isCustomColor && config.bgColor === 'custom' ? ', currently selected' : ''}`}
-                    />
+                    <div className="relative">
+                      <input
+                        type="color"
+                        value={config.customColor}
+                        onChange={(e) => {
+                          setConfig(prev => ({...prev, customColor: e.target.value, isCustomColor: true, bgColor: 'custom'}));
+                        }}
+                        className="opacity-0 absolute inset-0 w-6 h-6 cursor-pointer"
+                        title="Custom Color - Click to select any color"
+                        aria-label={`Custom background color${config.isCustomColor && config.bgColor === 'custom' ? ', currently selected' : ''}`}
+                      />
+                      <div 
+                        className={`w-6 h-6 rounded-full border-2 cursor-pointer transition-all hover:scale-110 shadow-sm ${
+                          config.isCustomColor && config.bgColor === 'custom'
+                            ? 'ring-2 ring-slate-600 ring-offset-1 scale-110'
+                            : 'hover:shadow-md'
+                        }`}
+                        style={{
+                          background: 'linear-gradient(45deg, #ff0000 0%, #ff8000 14%, #ffff00 28%, #80ff00 42%, #00ff00 57%, #00ff80 71%, #00ffff 85%, #0080ff 100%)',
+                          borderColor: '#e2e8f0'
+                        }}
+                        title="Custom Color - Click to select any color"
+                      />
+                    </div>
                   </div>
 
                     <div 
-                    className="font-black px-4 leading-tight whitespace-pre-line"
+                    className="font-black px-2 sm:px-3 md:px-4 leading-tight whitespace-pre-line"
                       style={textStyle}
                     >
                       {displayText}
@@ -884,6 +1132,10 @@ export default function Home() {
                         <li>• Try multi-line layouts for longer album titles</li>
                         <li>• Experiment with different color combinations</li>
                         <li>• Adjust blur for the perfect Charli XCX vibe</li>
+                        <li>• <strong>Smart Layout:</strong> System automatically adjusts font size to prevent overflow</li>
+                        <li>• Green indicator shows optimal layout, yellow for good, red for optimization needed</li>
+                        <li>• <strong>Safety Design:</strong> 40px safety margin ensures text never overflows boundaries</li>
+                        <li>• Supports automatic line wrapping and font scaling, adapts to all screen sizes</li>
                       </ul>
                     </div>
                   </div>
