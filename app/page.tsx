@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
-import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X } from 'lucide-react';
+import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -389,6 +389,49 @@ export default function Home() {
     }
   };
 
+  // 粘贴功能处理函数
+  const handlePasteFromClipboard = async () => {
+    try {
+      // 检查是否支持Clipboard API
+      if (!navigator.clipboard) {
+        toast.error('Your browser does not support clipboard functionality');
+        return;
+      }
+
+      // 读取剪贴板内容
+      const clipboardText = await navigator.clipboard.readText();
+      
+      if (!clipboardText) {
+        toast.error('Clipboard is empty');
+        return;
+      }
+
+      // 检查长度限制
+      if (clipboardText.length > 100) {
+        const truncatedText = clipboardText.substring(0, 100);
+        setConfig(prev => ({ ...prev, text: truncatedText }));
+        toast.success('Text pasted (truncated to 100 characters)');
+      } else {
+        setConfig(prev => ({ ...prev, text: clipboardText }));
+        toast.success('Text pasted successfully!');
+      }
+    } catch (error) {
+      // 处理各种可能的错误
+      if (error instanceof Error) {
+        if (error.name === 'NotAllowedError') {
+          toast.error('Please allow clipboard access permission');
+        } else if (error.name === 'NotFoundError') {
+          toast.error('No text content found in clipboard');
+        } else {
+          toast.error('Paste failed, please try again');
+        }
+      } else {
+        toast.error('Paste failed, please try again');
+      }
+      console.error('Clipboard error:', error);
+    }
+  };
+
   const previewStyle = {
     borderRadius: `${config.borderRadius}px`,
   };
@@ -604,9 +647,21 @@ export default function Home() {
                 <div className="space-y-6">
                   {/* Multi-line Text Input */}
                   <div>
-                    <label htmlFor="album-title-input" className="block text-sm font-medium text-slate-700 mb-2">
-                      Album Title (Multi-line Support)
-                    </label>
+                    <div className="flex items-center justify-between mb-2">
+                      <label htmlFor="album-title-input" className="text-sm font-medium text-slate-700">
+                        Album Title (Multi-line Support)
+                      </label>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handlePasteFromClipboard}
+                        className="text-xs h-7 px-2 hover:bg-lime-50 hover:text-lime-700 hover:border-lime-300 transition-colors"
+                        title="Paste text from clipboard"
+                      >
+                        <Clipboard className="w-3 h-3 mr-1" />
+                        Paste
+                      </Button>
+                    </div>
                     <textarea
                       id="album-title-input"
                       value={config.text}
@@ -617,9 +672,14 @@ export default function Home() {
                       rows={4}
                       aria-describedby="album-title-help"
                     />
-                    <p id="album-title-help" className="text-xs text-slate-500 mt-1">
-                      {config.text.length}/100 characters • Press Enter for new line
-                    </p>
+                    <div className="flex items-center justify-between mt-1">
+                      <p id="album-title-help" className="text-xs text-slate-500">
+                        {config.text.length}/100 characters • Press Enter for new line
+                      </p>
+                      <p className="text-xs text-slate-400">
+                        Shortcut: Ctrl+V or click Paste button
+                      </p>
+                    </div>
                   </div>
 
                   {/* Font Size */}
