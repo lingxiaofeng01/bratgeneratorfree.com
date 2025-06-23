@@ -432,6 +432,12 @@ export default function Home() {
     }
   };
 
+  // 清空文本功能处理函数
+  const handleClearText = () => {
+    setConfig(prev => ({ ...prev, text: '' }));
+    toast.success('Text cleared successfully!');
+  };
+
   const previewStyle = {
     borderRadius: `${config.borderRadius}px`,
   };
@@ -651,16 +657,28 @@ export default function Home() {
                       <label htmlFor="album-title-input" className="text-sm font-medium text-slate-700">
                         Album Title (Multi-line Support)
                       </label>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={handlePasteFromClipboard}
-                        className="text-xs h-7 px-2 hover:bg-lime-50 hover:text-lime-700 hover:border-lime-300 transition-colors"
-                        title="Paste text from clipboard"
-                      >
-                        <Clipboard className="w-3 h-3 mr-1" />
-                        Paste
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={handlePasteFromClipboard}
+                          className="text-xs h-7 px-2 hover:bg-lime-50 hover:text-lime-700 hover:border-lime-300 transition-colors"
+                          title="Paste text from clipboard"
+                        >
+                          <Clipboard className="w-3 h-3 mr-1" />
+                          Paste
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={handleClearText}
+                          className="text-xs h-7 px-2 hover:bg-red-50 hover:text-red-700 hover:border-red-300 transition-colors"
+                          title="Clear all text"
+                        >
+                          <X className="w-3 h-3 mr-1" />
+                          Clear
+                        </Button>
+                      </div>
                     </div>
                     <textarea
                       id="album-title-input"
@@ -677,7 +695,7 @@ export default function Home() {
                         {config.text.length}/100 characters • Press Enter for new line
                       </p>
                       <p className="text-xs text-slate-400">
-                        Shortcut: Ctrl+V or click Paste button
+                        Shortcuts: Ctrl+V (Paste) • Click buttons above
                       </p>
                     </div>
                   </div>
