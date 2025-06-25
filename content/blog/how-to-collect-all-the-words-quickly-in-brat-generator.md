@@ -10,7 +10,7 @@ category: "Tutorial"
 tags: ["brat generator", "text collection", "copy text", "meme generator", "tutorial", "quick tips"]
 image: "/images/blog/covers/how-to-collect-all-the-words-quickly-in-brat-generator.png"
 imageAlt: "Screenshot showing how to quickly collect all words in Brat Generator with copy button highlighted"
-featured: true
+featured: false
 slug: "how-to-collect-all-the-words-quickly-in-brat-generator"
 canonical: "https://www.bratgeneratorfree.com/blog/how-to-collect-all-the-words-quickly-in-brat-generator"
 keywords: "brat generator copy text, collect words brat generator, copy all text brat meme, fastest way copy brat text, brat generator tutorial"

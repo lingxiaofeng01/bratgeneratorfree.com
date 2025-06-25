@@ -7,7 +7,7 @@ category: "Tutorials"
 tags: ["sympathy generator", "brat style", "fan art", "charli xcx", "tutorials"]
 image: "/images/blog/covers/sympathy-generator-brat-cover.png"
 imageAlt: "Sympathy Generator and Brat Style Tutorial - Combining Charli XCX aesthetic designs"
-featured: false
+featured: true
 ---
 
 # 💿 How to Use the Sympathy Generator and Brat Style Together

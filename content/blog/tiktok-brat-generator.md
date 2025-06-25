@@ -7,7 +7,7 @@ category: "Tutorials"
 tags: ["tiktok", "brat generator", "video editing", "social media", "capcut"]
 image: "/images/blog/covers/tiktok-brat-generator-cover.png"
 imageAlt: "TikTok Brat Generator Tutorial - Creating brat-style text overlays for TikTok videos"
-featured: true
+featured: false
 ---
 
 # 🖍️ How to Use a TikTok Text Brat Generator (2025 Tutorial)
