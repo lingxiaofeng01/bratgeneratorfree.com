@@ -261,21 +261,21 @@ export default function AboutPage() {
               <p className="text-base md:text-lg mb-8 text-black/80 max-w-2xl mx-auto">
                 Join thousands of creators who are already using Brat Generator to bring their artistic visions to life.
                 Start creating your unique album covers today!
-              </p>
+          </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/">
                   <Button size="lg" variant="secondary" className="bg-white/20 hover:bg-white/30 text-black border-black/20">
                     <Sparkles className="w-5 h-5 mr-2" />
                     Start Creating
-                  </Button>
+            </Button>
                 </Link>
                 <Link href="/blog">
                   <Button size="lg" variant="outline" className="border-black/30 text-black hover:bg-white/10">
                     <BookOpen className="w-5 h-5 mr-2" />
                     Read Our Blog
-                  </Button>
+            </Button>
                 </Link>
-              </div>
+          </div>
             </CardContent>
           </Card>
         </section>
@@ -333,7 +333,7 @@ export default function AboutPage() {
                 <a href="#" className="block text-slate-400 hover:text-white transition-colors">
                   Privacy Policy
                 </a>
-              </div>
+            </div>
             </div>
           </div>
           

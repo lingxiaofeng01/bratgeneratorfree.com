@@ -655,8 +655,8 @@ export default function Home() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <label htmlFor="album-title-input" className="text-sm font-medium text-slate-700">
-                        Album Title (Multi-line Support)
-                      </label>
+                      Album Title (Multi-line Support)
+                    </label>
                       <div className="flex gap-2">
                         <Button
                           variant="outline"
@@ -692,8 +692,8 @@ export default function Home() {
                     />
                     <div className="flex items-center justify-between mt-1">
                       <p id="album-title-help" className="text-xs text-slate-500">
-                        {config.text.length}/100 characters • Press Enter for new line
-                      </p>
+                      {config.text.length}/100 characters • Press Enter for new line
+                    </p>
                       <p className="text-xs text-slate-400">
                         Shortcuts: Ctrl+V (Paste) • Click buttons above
                       </p>
