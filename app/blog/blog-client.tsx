@@ -14,8 +14,8 @@ interface BlogClientComponentProps {
 }
 
 export default function BlogClientComponent({ initialPosts }: BlogClientComponentProps) {
-  // 限制精选文章为2篇
-  const featuredPosts = initialPosts.filter(post => post.featured).slice(0, 2);
+  // 获取所有精选文章（移除限制）
+  const featuredPosts = initialPosts.filter(post => post.featured);
   
   // 获取非精选文章，按时间排序（最新的在前）
   const regularPosts = initialPosts.filter(post => !post.featured);
