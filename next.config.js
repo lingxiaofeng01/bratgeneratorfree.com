@@ -27,13 +27,47 @@ const nextConfig = {
   // SEO优化 - 重定向配置
   async redirects() {
     return [
-      // 重定向非www到www版本（主要重定向）
+      // 1. HTTP不带www重定向到HTTPS带www
       {
         source: '/:path*',
         has: [
           {
             type: 'host',
             value: 'bratgeneratorfree.com',
+          },
+          {
+            type: 'header',
+            key: 'x-forwarded-proto',
+            value: 'http',
+          },
+        ],
+        destination: 'https://www.bratgeneratorfree.com/:path*',
+        statusCode: 301,
+      },
+      // 2. HTTPS不带www重定向到HTTPS带www
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'bratgeneratorfree.com',
+          },
+        ],
+        destination: 'https://www.bratgeneratorfree.com/:path*',
+        statusCode: 301,
+      },
+      // 3. HTTP带www重定向到HTTPS带www
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.bratgeneratorfree.com',
+          },
+          {
+            type: 'header',
+            key: 'x-forwarded-proto',
+            value: 'http',
           },
         ],
         destination: 'https://www.bratgeneratorfree.com/:path*',
