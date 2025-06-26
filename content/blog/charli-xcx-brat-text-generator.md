@@ -10,7 +10,7 @@ category: "Design Tools"
 tags: ["charli xcx", "brat text generator", "brat cover meme", "brat generator", "brat font", "brat green background", "brat image maker", "charli xcx meme", "brat aesthetic", "free brat generator"]
 image: "/images/blog/covers/charli-xcx-brat-text-generator.png"
 imageAlt: "Charli XCX Brat Text Generator tutorial showing how to create custom BRAT album covers"
-featured: true
+featured: false
 slug: "charli-xcx-brat-text-generator"
 canonical: "https://www.bratgeneratorfree.com/blog/charli-xcx-brat-text-generator"
 keywords: "charli xcx brat text generator, brat cover meme maker, free brat generator, brat aesthetic generator, charli xcx meme maker"

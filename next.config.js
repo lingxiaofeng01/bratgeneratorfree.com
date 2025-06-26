@@ -37,7 +37,7 @@ const nextConfig = {
           },
         ],
         destination: 'https://www.bratgeneratorfree.com/:path*',
-        permanent: true,
+        statusCode: 301,
       },
     ]
   },
