@@ -623,8 +623,8 @@ export default function Home() {
           </h2>
           <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
             Design stunning brat album cover artwork inspired by Charli XCX's iconic aesthetic. 
-            Our generator makes it easy to create professional covers instantly with authentic blur effects. 
-            This powerful tool offers unlimited customization for your creative projects.
+            Our professional brat generator makes it easy to create authentic covers instantly with signature blur effects. 
+            This powerful brat generator tool offers unlimited customization options for your creative projects, featuring advanced typography controls and professional-grade export capabilities that deliver exceptional results every time.
           </p>
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-sm text-slate-500 px-4">
             <span className="flex items-center bg-white/50 px-3 py-1 rounded-full">
@@ -987,19 +987,19 @@ export default function Home() {
 
               {/* Tips Card */}
               <Card className="p-6 bg-gradient-to-br from-lime-50 to-emerald-50 border-lime-200">
-                <h4 className="font-semibold text-slate-800 mb-3">💡 Pro Tips</h4>
+                <h4 className="font-semibold text-slate-800 mb-3">💡 Pro Tips for Creative Design</h4>
                 <ul className="text-sm text-slate-600 space-y-2">
-                  <li>• Classic blurry effect default enabled, perfectly replicating Charli XCX original aesthetic</li>
-                  <li>• Use multi-line text for longer titles or creative layouts</li>
-                  <li>• Try different alignments for unique typography effects</li>
-                  <li>• Flip text to create artistic mirror effects</li>
-                  <li>• Adjust border radius for modern rounded or classic sharp edges</li>
-                  <li>• Perfect for social media, playlist covers, and more</li>
-                  <li>• Lowercase text follows the original "brat" aesthetic style</li>
-                  <li>• <strong>Smart Layout:</strong> System automatically adjusts font size to prevent overflow</li>
-                  <li>• Green indicator shows optimal layout, yellow for good, red for optimization needed</li>
-                  <li>• <strong>Safety Design:</strong> 40px safety margin ensures text never overflows boundaries</li>
-                  <li>• Supports automatic line wrapping and font scaling, adapts to all screen sizes</li>
+                  <li>• Classic blurry effect default enabled, perfectly replicating Charli XCX original aesthetic with authentic styling</li>
+                  <li>• Use multi-line text for longer titles or creative layouts to maximize visual impact</li>
+                  <li>• Try different alignments for unique typography effects and professional presentation</li>
+                  <li>• Flip text to create artistic mirror effects using our advanced transformation tools</li>
+                  <li>• Adjust border radius for modern rounded or classic sharp edges in your custom designs</li>
+                  <li>• Perfect for social media, playlist covers, promotional materials, and professional branding</li>
+                  <li>• Lowercase text follows the original "brat" aesthetic style - a signature design element</li>
+                  <li>• <strong>Smart Layout:</strong> Our brat generator automatically adjusts font size to prevent overflow issues</li>
+                  <li>• Visual indicators show layout optimization: green for optimal, yellow for good, red for needs adjustment</li>
+                  <li>• <strong>Safety Design:</strong> Built-in 40px safety margin ensures text never overflows container boundaries</li>
+                  <li>• Advanced line wrapping and font scaling technology adapts to all screen sizes with responsive design</li>
                 </ul>
               </Card>
             </div>
@@ -1129,8 +1129,8 @@ export default function Home() {
               How to Use Our Brat Generator
             </h3>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Create stunning brat album covers in just 4 simple steps with our powerful design tool. 
-              Follow this comprehensive guide to master every feature.
+              Create stunning brat album covers in just 4 simple steps with our powerful brat generator. 
+              Follow this comprehensive guide to master every feature and discover all the creative possibilities available to you.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -1143,7 +1143,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-3">Enter Your Text</h4>
               <p className="text-slate-600">
-                Type your album title or any text you want. Our tool supports multi-line input for creative layouts with unlimited possibilities.
+                Type your album title or any text you want to transform. Our brat generator supports multi-line input for creative layouts with unlimited possibilities and automatic formatting.
               </p>
             </Card>
             <Card className="p-6 text-center hover:shadow-lg transition-shadow border-t-4 border-blue-500">
@@ -1155,7 +1155,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-3">Choose Colors & Style</h4>
               <p className="text-slate-600">
-                Select from our preset colors or use custom colors. Pick from Classic, Mirror, Paper, or Scribble text style presets.
+                Select from our carefully curated preset colors or create custom color combinations. Pick from Classic, Mirror, Paper, or Scribble text style presets with our brat generator.
               </p>
             </Card>
             <Card className="p-6 text-center hover:shadow-lg transition-shadow border-t-4 border-purple-500">
@@ -1167,7 +1167,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-3">Customize Effects</h4>
               <p className="text-slate-600">
-                Adjust font size, text alignment, blur effects, and border radius. Real-time preview of all changes for perfect results.
+                Adjust font size, text alignment, blur effects, and border radius with precision controls. Our brat generator provides real-time preview of all changes for perfect results.
               </p>
             </Card>
             <Card className="p-6 text-center hover:shadow-lg transition-shadow border-t-4 border-pink-500">
@@ -1179,7 +1179,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-3">Download & Share</h4>
               <p className="text-slate-600">
-                Download your creation in high-quality PNG, JPEG, or SVG format. Perfect for social media, streaming platforms, and print.
+                Download your brat generator creation in high-quality PNG, JPEG, or SVG format. Perfect for social media platforms, streaming services, print applications, and professional use.
               </p>
             </Card>
           </div>
@@ -1191,29 +1191,29 @@ export default function Home() {
                 <BookOpen className="w-8 h-8 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-xl font-semibold text-slate-900 mb-4">
-                    Pro Design Tips
+                    Pro Design Tips & Best Practices
                   </h4>
                   <div className="grid md:grid-cols-2 gap-6 text-slate-600">
                     <div>
                       <h5 className="font-semibold text-slate-800 mb-2">✨ Style Presets</h5>
                       <ul className="space-y-1 text-sm">
-                        <li>• <strong>Classic:</strong> Bold black text with authentic blur effect</li>
-                        <li>• <strong>Mirror:</strong> Reversed text with right alignment</li>
-                        <li>• <strong>Paper:</strong> Clean text on white paper texture</li>
-                        <li>• <strong>Scribble:</strong> Artistic overlay with hand-drawn lines</li>
+                        <li>• <strong>Classic:</strong> Bold black text with authentic blur effect for traditional brat aesthetic</li>
+                        <li>• <strong>Mirror:</strong> Reversed text with right alignment for creative typography effects</li>
+                        <li>• <strong>Paper:</strong> Clean text on white paper texture for minimalist designs</li>
+                        <li>• <strong>Scribble:</strong> Artistic overlay with hand-drawn lines for unique visual appeal</li>
                       </ul>
                     </div>
                     <div>
                       <h5 className="font-semibold text-slate-800 mb-2">🎨 Design Tips</h5>
                       <ul className="space-y-1 text-sm">
-                        <li>• Use lowercase text for authentic brat aesthetic</li>
-                        <li>• Try multi-line layouts for longer album titles</li>
-                        <li>• Experiment with different color combinations</li>
-                        <li>• Adjust blur for the perfect Charli XCX vibe</li>
-                        <li>• <strong>Smart Layout:</strong> System automatically adjusts font size to prevent overflow</li>
-                        <li>• Green indicator shows optimal layout, yellow for good, red for optimization needed</li>
-                        <li>• <strong>Safety Design:</strong> 40px safety margin ensures text never overflows boundaries</li>
-                        <li>• Supports automatic line wrapping and font scaling, adapts to all screen sizes</li>
+                        <li>• Use lowercase text for authentic brat aesthetic that captures the original vibe</li>
+                        <li>• Try multi-line layouts for longer album titles and creative text arrangements</li>
+                        <li>• Experiment with different color combinations to find your perfect match</li>
+                        <li>• Adjust blur effects carefully for the perfect Charli XCX-inspired atmosphere</li>
+                        <li>• <strong>Smart Layout:</strong> Our brat generator automatically adjusts font size to prevent overflow issues</li>
+                        <li>• Visual indicators show layout quality: green for optimal, yellow for good, red for needs adjustment</li>
+                        <li>• <strong>Safety Design:</strong> Built-in 40px safety margin ensures text never overflows container boundaries</li>
+                        <li>• Advanced line wrapping and font scaling technology adapts to all screen sizes seamlessly</li>
                       </ul>
                     </div>
                   </div>
@@ -1230,8 +1230,8 @@ export default function Home() {
               Why Choose Our Brat Generator?
             </h3>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              The most powerful design tool with advanced features for creating professional album covers. 
-              Stand out as the best choice for creators worldwide.
+              The most comprehensive brat generator with advanced features for creating professional album covers. 
+              Stand out as the premier choice for creators worldwide with our cutting-edge brat generator technology and user-friendly interface.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -1241,7 +1241,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-2">Instant Generation</h4>
               <p className="text-slate-600">
-                Create professional-looking brat album covers in seconds with real-time preview using advanced technology
+                Create professional-looking brat album covers in seconds with real-time preview technology. Our advanced brat generator ensures smooth performance and instant visual feedback.
               </p>
             </Card>
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
@@ -1250,7 +1250,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-2">Advanced Customization</h4>
               <p className="text-slate-600">
-                Choose from multiple color combinations and typography options with comprehensive tools and features
+                Choose from multiple color combinations and typography options with comprehensive creative tools. Our brat generator offers precision control over every design element.
               </p>
             </Card>
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
@@ -1259,7 +1259,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-2">High-Quality Export</h4>
               <p className="text-slate-600">
-                Download your creations in high-resolution PNG format, perfect for any platform with professional results
+                Download your creations in high-resolution PNG format at 1200x1200 pixels, perfect for any platform. Professional brat generator results ensure crisp, stunning quality every time.
               </p>
             </Card>
           </div>
@@ -1334,7 +1334,8 @@ export default function Home() {
               Frequently Asked Questions
             </h3>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Everything you need to know about our design tool and how to use it effectively
+              Everything you need to know about our brat generator and how to use it effectively. 
+              Find answers to common questions and discover tips for getting the most out of your creative process.
             </p>
           </div>
           <div className="max-w-3xl mx-auto space-y-6">
@@ -1346,8 +1347,8 @@ export default function Home() {
                     What is a brat generator?
                   </h4>
                   <p className="text-slate-600">
-                    A brat generator is a design tool that creates album covers inspired by Charli XCX's iconic "brat" aesthetic. 
-                    Our tool allows you to create custom designs with bold typography and vibrant colors using advanced features.
+                    A brat generator is a specialized design tool that creates album covers inspired by Charli XCX's iconic "brat" aesthetic. 
+                    Our advanced brat generator allows you to create custom designs with bold typography, vibrant colors, and authentic styling that captures the essence of the original album artwork.
                   </p>
                 </div>
               </div>
@@ -1357,11 +1358,11 @@ export default function Home() {
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">
-                    How does the tool work?
+                    How does the brat generator work?
                   </h4>
                   <p className="text-slate-600">
-                    Our tool uses advanced typography rendering to create bold, impactful text designs. 
-                    Simply enter your text, choose colors and effects, and download your custom creation.
+                    Our brat generator uses advanced typography rendering technology to create bold, impactful text designs. 
+                    Simply enter your text, choose from our carefully crafted color palettes and effects, then download your custom creation in high-quality formats.
                   </p>
                 </div>
               </div>
@@ -1371,11 +1372,11 @@ export default function Home() {
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">
-                    Can I use designs for commercial purposes?
+                    Can I use brat generator designs for commercial purposes?
                   </h4>
                   <p className="text-slate-600">
-                    Yes! All designs created with our tool are free to use for personal and commercial projects. 
-                    Create album covers, social media posts, merchandise, and more with no restrictions.
+                    Yes! All designs created with our brat generator are completely free to use for personal and commercial projects. 
+                    Create album covers, social media posts, merchandise designs, promotional materials, and more with no restrictions or licensing fees.
                   </p>
                 </div>
               </div>
@@ -1385,11 +1386,11 @@ export default function Home() {
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">
-                    What format does the tool export?
+                    What format does the brat generator export?
                   </h4>
                   <p className="text-slate-600">
-                    Our tool exports high-quality PNG files at 1200x1200 pixels, perfect for social media, 
-                    streaming platforms, and print applications. The export format ensures crisp, professional results.
+                    Our brat generator exports high-quality PNG files at 1200x1200 pixels resolution, perfect for social media platforms, 
+                    streaming services, and print applications. We also offer JPEG and SVG formats for maximum compatibility and flexibility.
                   </p>
                 </div>
               </div>
@@ -1403,8 +1404,8 @@ export default function Home() {
             Ready to Create Your Masterpiece?
           </h3>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of artists using our tool to create stunning designs. 
-            Start creating with the best brat generator today!
+            Join thousands of artists and creators using our professional brat generator to create stunning artwork. 
+            Start creating with the best brat generator available today and discover your creative potential!
           </p>
           <Button 
             size="lg" 
@@ -1426,8 +1427,8 @@ export default function Home() {
                 <h4 className="text-xl font-bold">Brat Generator</h4>
               </div>
               <p className="text-slate-400 mb-4">
-                The ultimate design tool for creating stunning artwork inspired by Charli XCX's iconic aesthetic. 
-                Our professional brat generator offers unlimited creative possibilities.
+                The ultimate brat generator for creating stunning artwork inspired by Charli XCX's iconic aesthetic. 
+                Our professional brat generator offers unlimited creative possibilities with advanced features, intuitive controls, and professional-grade export capabilities.
               </p>
             </div>
             <div>
@@ -1442,7 +1443,7 @@ export default function Home() {
                       document.getElementById('generator')?.scrollIntoView({ behavior: 'smooth' });
                     }}
                   >
-                    Cover Generator
+                    Brat Generator
                   </a>
                 </li>
                 <li>
@@ -1454,7 +1455,7 @@ export default function Home() {
                       document.getElementById('generator')?.scrollIntoView({ behavior: 'smooth' });
                     }}
                   >
-                    Text Generator
+                    Brat Font Generator
                   </a>
                 </li>
               </ul>
@@ -1523,8 +1524,8 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400">
-            <p>&copy; 2025 Brat Generator. All rights reserved. Create stunning brat album covers with our free brat generator. 
-            The best brat generator for professional design results.</p>
+            <p>&copy; 2025 Brat Generator. All rights reserved. Create stunning brat album covers with our free brat generator tool. 
+            Professional brat generator for amazing design results.</p>
           </div>
         </div>
       </footer>

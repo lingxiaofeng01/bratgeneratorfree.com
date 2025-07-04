@@ -6,7 +6,7 @@ date: "2025-06-27"
 lastModified: "2025-06-27"
 readingTime: 6
 wordCount: 1200
-category: "Licensing & Legal"
+category: "Tutorials"
 tags: ["BRAT Generator", "commercial use", "MIT license", "annotation tool", "open source NLP", "BratGeneratorFree", "business licensing", "AI projects", "legal guide", "NLP tools"]
 image: "/images/blog/covers/brat-generator-commercial-use.png"
 imageAlt: "BRAT Generator commercial licensing guide for business and AI projects"
