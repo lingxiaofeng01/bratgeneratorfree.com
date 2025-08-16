@@ -13,6 +13,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import ScribbleOverlay from '@/components/ScribbleOverlay';
 import SocialShare from '@/components/SocialShare';
 import ImageExporter, { ExportFormat } from '@/lib/image-export';
+import AdSense, { BannerAd, ResponsiveAd } from '@/components/AdSense';
 
 export interface BlogPost {
   slug: string;
@@ -636,6 +637,16 @@ export default function Home() {
             <span className="flex items-center bg-white/50 px-3 py-1 rounded-full">
               <Zap className="w-4 h-4 mr-1" /> Instant Generation
             </span>
+          </div>
+        </section>
+
+        {/* Top Banner Ad */}
+        <section className="mb-8">
+          <div className="flex justify-center">
+            <BannerAd
+              adSlot="1234567890"
+              className="max-w-full"
+            />
           </div>
         </section>
 
@@ -1265,6 +1276,16 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Middle Content Ad */}
+        <section className="mb-16">
+          <div className="flex justify-center">
+            <ResponsiveAd
+              adSlot="2345678901"
+              className="max-w-full"
+            />
+          </div>
+        </section>
+
         {/* Latest Blog Posts Section */}
         {latestPosts.length > 0 && (
           <section id="blog-preview" className="mt-24">
@@ -1416,6 +1437,18 @@ export default function Home() {
           </Button>
         </section>
       </main>
+
+      {/* Bottom Ad Section */}
+      <section className="bg-slate-50 py-8">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center">
+            <ResponsiveAd
+              adSlot="3456789012"
+              className="max-w-full"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="about" className="bg-slate-900 text-white mt-24">

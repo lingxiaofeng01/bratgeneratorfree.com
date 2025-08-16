@@ -141,6 +141,13 @@ export default function RootLayout({
             gtag('config', 'G-DJELNT7LMX');
           `
         }} />
+
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3701727349784910"
+          crossOrigin="anonymous"
+        ></script>
         
         {/* 图标配置 - 符合Google 2025年SEO最佳实践 */}
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
