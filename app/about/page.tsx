@@ -172,7 +172,7 @@ export default function AboutPage() {
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Our Mission</h2>
               <p className="text-base md:text-lg text-slate-600 mb-6 leading-relaxed">
                 We are committed to democratizing design tools, ensuring that professional creative expression is no longer a privilege for a select few.
-                With Brat Generator, anyone can create an impressive album cover design in minutes.
+                With our Brat Generator, anyone can create an impressive album cover design in minutes using our intuitive Brat Generator platform.
               </p>
               <p className="text-base md:text-lg text-slate-600 mb-8 leading-relaxed">
                 We believe technology should serve creativity, not hinder it. That's why we simplify the complex design process
@@ -199,7 +199,7 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4">Our Vision</h3>
                   <p className="text-slate-700 leading-relaxed">
-                    To become the world's most popular creative design tool platform, enabling everyone to easily express their creative ideas,
+                    To become the world's most popular Brat Generator and creative design tool platform, enabling everyone to easily express their creative ideas with Brat Generator,
                     driving the process of design democratization, and making creativity ubiquitous.
                   </p>
                 </div>
