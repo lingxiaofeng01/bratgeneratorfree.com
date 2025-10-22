@@ -552,11 +552,23 @@ export default function Home() {
               >
                 Blog
               </Link>
-              <Link 
-                href="/about" 
+              <Link
+                href="/about"
                 className="text-slate-600 hover:text-lime-600 transition-colors"
               >
                 About
+              </Link>
+              <Link
+                href="/privacy"
+                className="text-slate-600 hover:text-lime-600 transition-colors text-sm"
+              >
+                Privacy
+              </Link>
+              <Link
+                href="/contact"
+                className="text-slate-600 hover:text-lime-600 transition-colors text-sm"
+              >
+                Contact
               </Link>
             </div>
 
@@ -603,12 +615,26 @@ export default function Home() {
                 >
                   Blog
                 </Link>
-                <Link 
-                  href="/about" 
+                <Link
+                  href="/about"
                   className="text-slate-600 hover:text-lime-600 transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   About
+                </Link>
+                <Link
+                  href="/privacy"
+                  className="text-slate-600 hover:text-lime-600 transition-colors py-2 text-sm"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Privacy
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-slate-600 hover:text-lime-600 transition-colors py-2 text-sm"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Contact
                 </Link>
               </div>
             </div>
@@ -638,15 +664,31 @@ export default function Home() {
               <Zap className="w-4 h-4 mr-1" /> Instant Generation
             </span>
           </div>
+          <div className="text-center mt-6 text-xs text-slate-500">
+            <p>ⓘ Fan-inspired tool • Not official • Inspired by Charli XCX's brat aesthetic</p>
+          </div>
         </section>
 
-        {/* Top Banner Ad */}
-        <section className="mb-8">
-          <div className="flex justify-center">
-            <BannerAd
-              adSlot="1234567890"
-              className="max-w-full"
-            />
+        {/* What is Brat Generator Section */}
+        <section className="mb-16 bg-white rounded-xl p-8 md:p-12 shadow-sm border border-slate-100">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-slate-900 mb-6">What is Brat Generator?</h2>
+            <div className="space-y-4 text-slate-700 leading-relaxed">
+              <p>
+                Brat Generator is a free, fan-inspired creative tool designed to help you create stunning album cover artwork
+                inspired by Charli XCX's iconic "brat" aesthetic. Whether you're a musician, designer, content creator, or just someone
+                who loves the brat aesthetic, our tool makes it incredibly easy to design professional-looking covers in minutes.
+              </p>
+              <p>
+                With our intuitive interface and powerful customization options, you can instantly generate unique album covers featuring
+                signature blur effects, custom colors, multiple text styles, and advanced typography controls. No design experience needed—
+                just input your text, customize the style, and download your masterpiece in high-resolution PNG format.
+              </p>
+              <p>
+                <strong>Key Features:</strong> Real-time preview with blur effects, unlimited color customization, multi-line text support,
+                multiple export formats (PNG, JPEG, SVG), responsive design for all devices, and completely free to use with no registration required.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -1276,13 +1318,26 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Middle Content Ad */}
-        <section className="mb-16">
-          <div className="flex justify-center">
-            <ResponsiveAd
-              adSlot="2345678901"
-              className="max-w-full"
-            />
+        {/* Examples & Tips Section */}
+        <section className="mb-24 bg-gradient-to-br from-lime-50 to-emerald-50 rounded-xl p-8 md:p-12 border border-lime-200">
+          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Examples & Design Tips</h2>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h3 className="text-xl font-semibold text-slate-900 mb-3">💡 Real-World Examples</h3>
+              <ul className="space-y-3 text-slate-700">
+                <li><strong>Album Covers:</strong> Create authentic brat-inspired album artwork for your music projects</li>
+                <li><strong>Social Media:</strong> Design eye-catching posts for Instagram, TikTok, and other platforms</li>
+                <li><strong>Merchandise:</strong> Generate designs for t-shirts, hoodies, and promotional materials</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h3 className="text-xl font-semibold text-slate-900 mb-3">🎨 Pro Design Tips</h3>
+              <ul className="space-y-3 text-slate-700">
+                <li><strong>Lowercase Text:</strong> Use lowercase for authentic brat aesthetic that captures the original vibe</li>
+                <li><strong>Color Contrast:</strong> Experiment with different color combinations for maximum visual impact</li>
+                <li><strong>Blur Effects:</strong> Adjust blur carefully to achieve the perfect Charli XCX-inspired atmosphere</li>
+              </ul>
+            </div>
           </div>
         </section>
 
@@ -1360,6 +1415,21 @@ export default function Home() {
             </p>
           </div>
           <div className="max-w-3xl mx-auto space-y-6">
+            <Card className="p-6 border-l-4 border-l-amber-500 bg-amber-50">
+              <div className="flex items-start space-x-4">
+                <HelpCircle className="w-6 h-6 text-amber-600 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="text-lg font-semibold text-slate-900 mb-2">
+                    Is Brat Generator an official product?
+                  </h4>
+                  <p className="text-slate-600">
+                    <strong>No.</strong> Brat Generator is a fan-inspired creative tool inspired by Charli XCX's iconic "brat" aesthetic.
+                    This is NOT an official product and is NOT affiliated with, endorsed by, or associated with Charli XCX, her management, record label, or any official entity.
+                    We are independent creators who built this tool for the community. All references to "brat" are for inspirational purposes only.
+                  </p>
+                </div>
+              </div>
+            </Card>
             <Card className="p-6">
               <div className="flex items-start space-x-4">
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
@@ -1419,6 +1489,16 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Ad Section - After FAQ */}
+        <section className="mb-16 bg-slate-50 py-8 -mx-4 px-4">
+          <div className="flex justify-center">
+            <ResponsiveAd
+              adSlot="1234567890"
+              className="max-w-full"
+            />
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="text-center bg-gradient-to-r from-lime-500 to-emerald-500 rounded-2xl p-12 text-black">
           <h3 className="text-3xl font-bold mb-4">
@@ -1438,18 +1518,6 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Bottom Ad Section */}
-      <section className="bg-slate-50 py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-center">
-            <ResponsiveAd
-              adSlot="3456789012"
-              className="max-w-full"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer id="about" className="bg-slate-900 text-white mt-24">
         <div className="container mx-auto px-4 py-12">
@@ -1460,8 +1528,11 @@ export default function Home() {
                 <h4 className="text-xl font-bold">Brat Generator</h4>
               </div>
               <p className="text-slate-400 mb-4">
-                The ultimate brat generator for creating stunning artwork inspired by Charli XCX's iconic aesthetic. 
+                The ultimate brat generator for creating stunning artwork inspired by Charli XCX's iconic aesthetic.
                 Our professional brat generator offers unlimited creative possibilities with advanced features, intuitive controls, and professional-grade export capabilities.
+              </p>
+              <p className="text-xs text-slate-500 italic">
+                ⓘ Fan-inspired tool • Not official • Inspired by Charli XCX's brat aesthetic
               </p>
             </div>
             <div>
@@ -1531,27 +1602,31 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h5 className="font-semibold mb-4">Support</h5>
+              <h5 className="font-semibold mb-4">Legal</h5>
               <ul className="space-y-2 text-slate-400">
                 <li>
-                  <a 
-                    href="#help" 
-                    className="hover:text-white transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      toast.success('Need help? Contact us at support@bratgenerator.com');
-                    }}
+                  <Link
+                    href="/privacy"
+                    className="hover:text-white transition-colors"
                   >
-                    Help Center
-                  </a>
+                    Privacy Policy
+                  </Link>
                 </li>
                 <li>
-                  <a 
-                    href="mailto:contact@bratgenerator.com" 
+                  <Link
+                    href="/terms"
+                    className="hover:text-white transition-colors"
+                  >
+                    Terms of Service
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
                     className="hover:text-white transition-colors"
                   >
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -79,6 +79,12 @@ export default function AboutPage() {
                 About
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-lime-500 rounded-full"></div>
               </Link>
+              <Link href="/privacy" className="text-slate-600 hover:text-slate-900 transition-colors text-sm">
+                Privacy
+              </Link>
+              <Link href="/terms" className="text-slate-600 hover:text-slate-900 transition-colors text-sm">
+                Terms
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -172,6 +178,13 @@ export default function AboutPage() {
                 We believe technology should serve creativity, not hinder it. That's why we simplify the complex design process
                 into an intuitive interface, allowing users to focus on their creative ideas rather than technical details.
               </p>
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
+              <p className="text-sm text-amber-900">
+                <strong>ⓘ Important Disclaimer:</strong> Brat Generator is a fan-inspired creative tool inspired by Charli XCX's iconic "brat" aesthetic.
+                This is NOT an official product and is NOT affiliated with, endorsed by, or associated with Charli XCX, her management, record label, or any official entity.
+                We are independent creators who built this tool for the community.
+              </p>
+            </div>
               <Link href="/">
                 <Button className="bg-lime-500 hover:bg-lime-600 text-black font-semibold">
                   Start Creating <ChevronRight className="w-4 h-4 ml-2" />
@@ -322,17 +335,17 @@ export default function AboutPage() {
             </div>
             
             <div>
-              <h3 className="text-lg font-semibold mb-4">Support</h3>
+              <h3 className="text-lg font-semibold mb-4">Legal</h3>
               <div className="space-y-2">
-                <a href="#" className="block text-slate-400 hover:text-white transition-colors">
-                  Help Center
-                </a>
-                <a href="#" className="block text-slate-400 hover:text-white transition-colors">
-                  Contact Us
-                </a>
-                <a href="#" className="block text-slate-400 hover:text-white transition-colors">
+                <Link href="/privacy" className="block text-slate-400 hover:text-white transition-colors">
                   Privacy Policy
-                </a>
+                </Link>
+                <Link href="/terms" className="block text-slate-400 hover:text-white transition-colors">
+                  Terms of Service
+                </Link>
+                <Link href="/contact" className="block text-slate-400 hover:text-white transition-colors">
+                  Contact Us
+                </Link>
             </div>
             </div>
           </div>
