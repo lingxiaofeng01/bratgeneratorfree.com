@@ -1293,58 +1293,7 @@ export default function Home() {
               </p>
             </Card>
           </div>
-        </section>
 
-        {/* Brat Text Generator Capabilities Section */}
-        <section className="mb-24">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-slate-900 mb-4">
-              Brat Text Generator Capabilities
-            </h3>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Our advanced Brat Text Generator offers powerful text rendering and customization features.
-              Discover what makes our Brat Text Generator the perfect choice for creating stunning designs.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="p-6 border-l-4 border-l-lime-500">
-              <h4 className="text-xl font-semibold text-slate-900 mb-4">🎨 Text Styling with Brat Text Generator</h4>
-              <ul className="space-y-3 text-slate-700">
-                <li><strong>Multiple Presets:</strong> Our Brat Text Generator includes Classic, Mirror, Paper, and Scribble styles for diverse creative options</li>
-                <li><strong>Custom Colors:</strong> The Brat Text Generator lets you choose from preset palettes or create unlimited custom color combinations</li>
-                <li><strong>Typography Control:</strong> Adjust font size, line height, and letter spacing with precision using our Brat Text Generator</li>
-                <li><strong>Text Alignment:</strong> Position your text left, center, or right with the Brat Text Generator's flexible alignment options</li>
-              </ul>
-            </Card>
-            <Card className="p-6 border-l-4 border-l-blue-500">
-              <h4 className="text-xl font-semibold text-slate-900 mb-4">✨ Advanced Effects in Brat Text Generator</h4>
-              <ul className="space-y-3 text-slate-700">
-                <li><strong>Blur Effects:</strong> The Brat Text Generator's signature blur feature creates the authentic aesthetic with adjustable intensity</li>
-                <li><strong>Flip & Transform:</strong> Flip your text horizontally or vertically using Brat Text Generator's transformation tools</li>
-                <li><strong>Border Radius:</strong> Add rounded corners to your design with the Brat Text Generator's border customization</li>
-                <li><strong>Real-time Preview:</strong> See changes instantly as you adjust settings in the Brat Text Generator interface</li>
-              </ul>
-            </Card>
-            <Card className="p-6 border-l-4 border-l-purple-500">
-              <h4 className="text-xl font-semibold text-slate-900 mb-4">📝 Multi-line Text Support</h4>
-              <ul className="space-y-3 text-slate-700">
-                <li><strong>Flexible Layouts:</strong> The Brat Text Generator supports multi-line input for complex text arrangements</li>
-                <li><strong>Auto-scaling:</strong> Our Brat Text Generator automatically adjusts font size to fit your content perfectly</li>
-                <li><strong>Line Wrapping:</strong> The Brat Text Generator intelligently wraps text to prevent overflow and maintain design integrity</li>
-                <li><strong>Character Limit:</strong> Create designs with up to 100 characters using the Brat Text Generator</li>
-              </ul>
-            </Card>
-            <Card className="p-6 border-l-4 border-l-pink-500">
-              <h4 className="text-xl font-semibold text-slate-900 mb-4">💾 Export & Share Options</h4>
-              <ul className="space-y-3 text-slate-700">
-                <li><strong>Multiple Formats:</strong> Export your Brat Text Generator creations as PNG, JPEG, or SVG files</li>
-                <li><strong>High Resolution:</strong> The Brat Text Generator exports at 1200x1200 pixels for professional quality</li>
-                <li><strong>Social Sharing:</strong> Share your Brat Text Generator designs directly to social media platforms</li>
-                <li><strong>Instant Download:</strong> Get your Brat Text Generator creation instantly without registration or delays</li>
-              </ul>
-            </Card>
-          </div>
-        </section>
 
         {/* About the Tool Section */}
         <section className="mb-24 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8 md:p-12 border border-slate-200">
@@ -1387,22 +1336,22 @@ export default function Home() {
 
         {/* Examples & Tips Section */}
         <section className="mb-24 bg-gradient-to-br from-lime-50 to-emerald-50 rounded-xl p-8 md:p-12 border border-lime-200">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Brat Generator Use Cases & Tips</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Brat Text Generator Use Cases & Tips</h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-slate-900 mb-3">💡 Brat Generator Use Cases</h3>
+              <h3 className="text-xl font-semibold text-slate-900 mb-3">💡 Brat Text Generator Use Cases</h3>
               <ul className="space-y-3 text-slate-700">
-                <li><strong>Music Projects:</strong> Create authentic artwork with Brat Generator for your album releases and singles</li>
-                <li><strong>Social Content:</strong> Design eye-catching posts using Brat Generator for Instagram, TikTok, and other platforms</li>
-                <li><strong>Merchandise:</strong> Generate designs with Brat Generator for t-shirts, hoodies, and promotional materials</li>
+                <li><strong>Music Projects:</strong> Create authentic artwork with our Brat Text Generator for your album releases and singles</li>
+                <li><strong>Social Content:</strong> Design eye-catching posts using the Brat Text Generator for Instagram, TikTok, and other platforms</li>
+                <li><strong>Merchandise:</strong> Generate designs with the Brat Text Generator for t-shirts, hoodies, and promotional materials</li>
               </ul>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-slate-900 mb-3">🎨 Brat Generator Design Tips</h3>
+              <h3 className="text-xl font-semibold text-slate-900 mb-3">🎨 Brat Text Generator Design Tips</h3>
               <ul className="space-y-3 text-slate-700">
-                <li><strong>Typography:</strong> Use lowercase text in Brat Generator to capture the authentic aesthetic and original vibe</li>
-                <li><strong>Color Harmony:</strong> Experiment with different color combinations in Brat Generator for maximum visual impact</li>
-                <li><strong>Visual Effects:</strong> Adjust blur carefully in Brat Generator to achieve the perfect atmospheric quality</li>
+                <li><strong>Typography:</strong> Use lowercase text in the Brat Text Generator to capture the authentic aesthetic and original vibe</li>
+                <li><strong>Color Harmony:</strong> Experiment with different color combinations in the Brat Text Generator for maximum visual impact</li>
+                <li><strong>Visual Effects:</strong> Adjust blur carefully in the Brat Text Generator to achieve the perfect atmospheric quality</li>
               </ul>
             </div>
           </div>
@@ -1470,6 +1419,128 @@ export default function Home() {
         </section>
         )}
 
+        {/* Success Stories Section */}
+        <section className="mb-24 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-8 md:p-12 border border-emerald-200">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-slate-900 mb-4">
+              Success Stories with Brat Generator
+            </h3>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              See how creators and artists are using Brat Generator to bring their visions to life.
+              Discover inspiring stories from our Brat Generator community.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <Card className="p-6 border-t-4 border-t-emerald-500">
+              <div className="flex items-center mb-4">
+                <div className="flex space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+              </div>
+              <p className="text-slate-700 mb-4 italic">
+                "The Brat Text Generator completely transformed how I create album artwork. The Brat Text Generator features are incredibly intuitive, and I can produce professional designs in minutes using the Brat Text Generator. Highly recommended!"
+              </p>
+              <p className="font-semibold text-slate-900">Alex M.</p>
+              <p className="text-sm text-slate-600">Independent Musician</p>
+            </Card>
+            <Card className="p-6 border-t-4 border-t-teal-500">
+              <div className="flex items-center mb-4">
+                <div className="flex space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+              </div>
+              <p className="text-slate-700 mb-4 italic">
+                "As a graphic designer, I was skeptical at first. But the Brat Text Generator exceeded my expectations. The customization options with the Brat Text Generator are fantastic, and my clients love the results from using the Brat Text Generator!"
+              </p>
+              <p className="font-semibold text-slate-900">Jordan T.</p>
+              <p className="text-sm text-slate-600">Graphic Designer</p>
+            </Card>
+            <Card className="p-6 border-t-4 border-t-cyan-500">
+              <div className="flex items-center mb-4">
+                <div className="flex space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+              </div>
+              <p className="text-slate-700 mb-4 italic">
+                "I use the Brat Text Generator for all my social media content. The Brat Text Generator's ease of use means I can create multiple designs daily without any design background using the Brat Text Generator. It's a game-changer!"
+              </p>
+              <p className="font-semibold text-slate-900">Sam K.</p>
+              <p className="text-sm text-slate-600">Content Creator</p>
+            </Card>
+          </div>
+        </section>
+
+        {/* Brat Generator Pricing Section */}
+        <section className="mb-24">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-slate-900 mb-4">
+              Brat Generator Pricing
+            </h3>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              The Brat Text Generator is completely free to use. No hidden fees, no subscriptions, no premium tiers.
+              Access all Brat Text Generator features and create unlimited designs with the Brat Text Generator at no cost.
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <Card className="p-8 bg-gradient-to-br from-lime-50 to-emerald-50 border-2 border-lime-500">
+              <div className="text-center">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Brat Generator - Free Forever</h4>
+                <p className="text-4xl font-bold text-lime-600 mb-6">$0</p>
+                <p className="text-slate-600 mb-8">
+                  Everything you need to create stunning designs with Brat Generator is included at no cost.
+                </p>
+                <ul className="space-y-3 text-left mb-8">
+                  <li className="flex items-center text-slate-700">
+                    <Zap className="w-5 h-5 text-lime-600 mr-3 flex-shrink-0" />
+                    <span>Unlimited Brat Generator design creation</span>
+                  </li>
+                  <li className="flex items-center text-slate-700">
+                    <Zap className="w-5 h-5 text-lime-600 mr-3 flex-shrink-0" />
+                    <span>All Brat Text Generator customization options</span>
+                  </li>
+                  <li className="flex items-center text-slate-700">
+                    <Zap className="w-5 h-5 text-lime-600 mr-3 flex-shrink-0" />
+                    <span>High-resolution exports with Brat Generator</span>
+                  </li>
+                  <li className="flex items-center text-slate-700">
+                    <Zap className="w-5 h-5 text-lime-600 mr-3 flex-shrink-0" />
+                    <span>Multiple export formats (PNG, JPEG, SVG)</span>
+                  </li>
+                  <li className="flex items-center text-slate-700">
+                    <Zap className="w-5 h-5 text-lime-600 mr-3 flex-shrink-0" />
+                    <span>Real-time preview with Brat Generator</span>
+                  </li>
+                  <li className="flex items-center text-slate-700">
+                    <Zap className="w-5 h-5 text-lime-600 mr-3 flex-shrink-0" />
+                    <span>Social media sharing integration</span>
+                  </li>
+                  <li className="flex items-center text-slate-700">
+                    <Zap className="w-5 h-5 text-lime-600 mr-3 flex-shrink-0" />
+                    <span>Commercial use rights for all Brat Generator creations</span>
+                  </li>
+                  <li className="flex items-center text-slate-700">
+                    <Zap className="w-5 h-5 text-lime-600 mr-3 flex-shrink-0" />
+                    <span>No registration or account required</span>
+                  </li>
+                </ul>
+                <Button
+                  size="lg"
+                  className="bg-lime-600 hover:bg-lime-700 text-white font-semibold px-8 py-3"
+                  onClick={() => document.getElementById('generator')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Start Using Brat Generator Now
+                </Button>
+              </div>
+            </Card>
+          </div>
+
+
         {/* FAQ Section */}
         <section id="faq" className="mb-24">
           <div className="text-center mb-12">
@@ -1502,11 +1573,11 @@ export default function Home() {
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">
-                    What does Brat Generator do?
+                    What does the Brat Text Generator do?
                   </h4>
                   <p className="text-slate-600">
-                    Brat Generator is a specialized design platform that creates album covers inspired by Charli XCX's iconic aesthetic.
-                    With our Brat Generator, you can create custom designs with bold typography, vibrant colors, and authentic styling that captures the essence of this visual movement.
+                    The Brat Text Generator is a specialized design platform that creates album covers inspired by Charli XCX's iconic aesthetic.
+                    With our Brat Text Generator, you can create custom designs with bold typography, vibrant colors, and authentic styling that captures the essence of this visual movement.
                   </p>
                 </div>
               </div>
@@ -1516,11 +1587,11 @@ export default function Home() {
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">
-                    How do I use Brat Generator?
+                    How do I use the Brat Text Generator?
                   </h4>
                   <p className="text-slate-600">
-                    Simply input your text into Brat Generator, choose your preferred colors and effects, and watch the real-time preview update instantly.
-                    Adjust typography, blur intensity, and layout options until you're happy with the result, then export your Brat Generator creation in your desired format.
+                    Simply input your text into the Brat Text Generator, choose your preferred colors and effects, and watch the real-time preview update instantly.
+                    Adjust typography, blur intensity, and layout options until you're happy with the result, then export your Brat Text Generator creation in your desired format.
                   </p>
                 </div>
               </div>
@@ -1530,11 +1601,11 @@ export default function Home() {
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">
-                    Can I use Brat Generator designs commercially?
+                    Can I use Brat Text Generator designs commercially?
                   </h4>
                   <p className="text-slate-600">
-                    Absolutely! All designs you create with Brat Generator are completely free to use for personal and commercial projects.
-                    Use your Brat Generator creations for album covers, social media posts, merchandise, promotional materials, and more with no restrictions or licensing fees.
+                    Absolutely! All designs you create with the Brat Text Generator are completely free to use for personal and commercial projects.
+                    Use your Brat Text Generator creations for album covers, social media posts, merchandise, promotional materials, and more with no restrictions or licensing fees.
                   </p>
                 </div>
               </div>
@@ -1544,11 +1615,11 @@ export default function Home() {
                 <HelpCircle className="w-6 h-6 text-lime-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">
-                    What formats does Brat Generator export?
+                    What formats does the Brat Text Generator export?
                   </h4>
                   <p className="text-slate-600">
-                    Brat Generator exports high-quality files at 1200x1200 pixels resolution in PNG, JPEG, and SVG formats.
-                    Our Brat Generator ensures perfect compatibility with social media platforms, streaming services, print applications, and any other use case you have in mind.
+                    The Brat Text Generator exports high-quality files at 1200x1200 pixels resolution in PNG, JPEG, and SVG formats.
+                    Our Brat Text Generator ensures perfect compatibility with social media platforms, streaming services, print applications, and any other use case you have in mind.
                   </p>
                 </div>
               </div>
