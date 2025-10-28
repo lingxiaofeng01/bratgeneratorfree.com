@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
-import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard } from 'lucide-react';
+import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard, Skull } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -537,7 +537,7 @@ export default function Home() {
                 HOME
               </Link>
               <Link
-                href="/generators/glitter-text"
+                href="/generators"
                 className="text-slate-600 hover:text-lime-600 transition-colors"
               >
                 Generators
@@ -598,7 +598,7 @@ export default function Home() {
                   HOME
                 </Link>
                 <Link
-                  href="/generators/glitter-text"
+                  href="/generators"
                   className="text-slate-600 hover:text-lime-600 transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -1854,18 +1854,20 @@ export default function Home() {
                 </div>
               </Card>
             </Link>
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <BookOpen className="w-6 h-6 text-blue-600" />
-              </div>
-              <h4 className="text-lg font-semibold text-slate-900 mb-3">Design Tutorials & Guides</h4>
-              <p className="text-slate-600 mb-4">
-                Learn professional design techniques and creative workflows. Master the art of creating stunning visuals with our comprehensive guides.
-              </p>
-              <Link href="/blog" className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center">
-                Learn More <ChevronRight className="w-3 h-3 ml-1" />
-              </Link>
-            </Card>
+            <Link href="/generators/dark-souls-text">
+              <Card className="p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-200">
+                <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-slate-800 rounded-lg flex items-center justify-center mb-4">
+                  <Skull className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-lg font-semibold text-slate-900 mb-3">Dark Souls Text Generator</h4>
+                <p className="text-slate-600 mb-4">
+                  Create iconic Dark Souls text messages like "YOU DIED" and "VICTORY ACHIEVED". Perfect for gaming memes and content.
+                </p>
+                <div className="text-red-600 hover:text-red-700 font-medium text-sm flex items-center">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
             <Card className="p-6 hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                 <Palette className="w-6 h-6 text-green-600" />

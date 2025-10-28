@@ -71,6 +71,16 @@ export default function GlitterTextGenerator() {
   const [borderWidth, setBorderWidth] = useState('2');
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  // Update page title and meta
+  useEffect(() => {
+    document.title = 'Glitter Text Generator - 176+ Free Glitter Effects & Fonts';
+
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Create dazzling glitter text with 176+ unique effects. Free online glitter text generator with custom fonts, sizes, angles, shadows, and borders. Instant download, no signup required.');
+    }
+  }, []);
+
   // Generate glitter text
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -164,6 +174,9 @@ export default function GlitterTextGenerator() {
               <Link href="/" className="text-slate-600 hover:text-purple-600 transition-colors">
                 HOME
               </Link>
+              <Link href="/generators" className="text-slate-600 hover:text-purple-600 transition-colors">
+                Generators
+              </Link>
               <Link href="/blog" className="text-slate-600 hover:text-purple-600 transition-colors">
                 Blog
               </Link>
@@ -191,6 +204,9 @@ export default function GlitterTextGenerator() {
               <div className="flex flex-col space-y-4 pt-4">
                 <Link href="/" className="text-slate-600 hover:text-purple-600 transition-colors py-2">
                   HOME
+                </Link>
+                <Link href="/generators" className="text-slate-600 hover:text-purple-600 transition-colors py-2">
+                  Generators
                 </Link>
                 <Link href="/blog" className="text-slate-600 hover:text-purple-600 transition-colors py-2">
                   Blog

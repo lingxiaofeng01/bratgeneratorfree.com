@@ -16,16 +16,28 @@ export async function GET() {
         priority: 1.0,
       },
       {
-        url: `${baseUrl}/blog`,
+        url: `${baseUrl}/generators`,
         lastModified: new Date().toISOString(),
-        changeFrequency: 'daily' as const,
-        priority: 0.9,
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
       },
       {
         url: `${baseUrl}/generators/glitter-text`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'weekly' as const,
         priority: 0.95,
+      },
+      {
+        url: `${baseUrl}/generators/dark-souls-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
+        url: `${baseUrl}/blog`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'daily' as const,
+        priority: 0.9,
       },
       {
         url: `${baseUrl}/about`,
@@ -124,16 +136,28 @@ ${allUrls
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>${baseUrl}/blog</loc>
+    <loc>${baseUrl}/generators</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
   </url>
   <url>
     <loc>${baseUrl}/generators/glitter-text</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/generators/dark-souls-text</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/blog</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>${baseUrl}/about</loc>
