@@ -536,8 +536,14 @@ export default function Home() {
               <Link href="/" className="text-slate-900 font-medium hover:text-lime-600 transition-colors">
                 HOME
               </Link>
-              <a 
-                href="#how-to-use" 
+              <Link
+                href="/generators/glitter-text"
+                className="text-slate-600 hover:text-lime-600 transition-colors"
+              >
+                Generators
+              </Link>
+              <a
+                href="#how-to-use"
                 className="text-slate-600 hover:text-lime-600 transition-colors cursor-pointer"
                 onClick={(e) => {
                   e.preventDefault();
@@ -546,8 +552,8 @@ export default function Home() {
               >
                 How to Use
               </a>
-              <Link 
-                href="/blog" 
+              <Link
+                href="/blog"
                 className="text-slate-600 hover:text-lime-600 transition-colors"
               >
                 Blog
@@ -557,12 +563,6 @@ export default function Home() {
                 className="text-slate-600 hover:text-lime-600 transition-colors"
               >
                 About
-              </Link>
-              <Link
-                href="/privacy"
-                className="text-slate-600 hover:text-lime-600 transition-colors text-sm"
-              >
-                Privacy
               </Link>
               <Link
                 href="/contact"
@@ -590,15 +590,22 @@ export default function Home() {
           {isMobileMenuOpen && (
             <div className="md:hidden mt-4 pb-4 border-t border-slate-200">
               <div className="flex flex-col space-y-4 pt-4">
-                <Link 
-                  href="/" 
+                <Link
+                  href="/"
                   className="text-slate-900 font-medium hover:text-lime-600 transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   HOME
                 </Link>
-                <a 
-                  href="#how-to-use" 
+                <Link
+                  href="/generators/glitter-text"
+                  className="text-slate-600 hover:text-lime-600 transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Generators
+                </Link>
+                <a
+                  href="#how-to-use"
                   className="text-slate-600 hover:text-lime-600 transition-colors cursor-pointer py-2"
                   onClick={(e) => {
                     e.preventDefault();
@@ -608,8 +615,8 @@ export default function Home() {
                 >
                   How to Use
                 </a>
-                <Link 
-                  href="/blog" 
+                <Link
+                  href="/blog"
                   className="text-slate-600 hover:text-lime-600 transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -621,13 +628,6 @@ export default function Home() {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   About
-                </Link>
-                <Link
-                  href="/privacy"
-                  className="text-slate-600 hover:text-lime-600 transition-colors py-2 text-sm"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Privacy
                 </Link>
                 <Link
                   href="/contact"
@@ -1828,87 +1828,65 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Resources & Learning Section */}
-        <section className="mb-24 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 md:p-12 border border-blue-200">
+        {/* Other Generators Section */}
+        <section className="mb-24 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8 md:p-12 border border-purple-200">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-slate-900 mb-4">
-              Resources & Learning Hub
+              More Creative Generators
             </h3>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Master the Brat Generator with our comprehensive guides, tutorials, and design resources.
-              Learn best practices and discover advanced techniques to create stunning designs with Brat Generator.
+              Explore our collection of professional design generators.
+              Create stunning visuals with powerful tools and unlimited creative possibilities.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <Link href="/generators/glitter-text">
+              <Card className="p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-4">
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-lg font-semibold text-slate-900 mb-3">Glitter Text Generator</h4>
+                <p className="text-slate-600 mb-4">
+                  Create dazzling glitter text with 176+ unique effects. Customize fonts, sizes, angles, shadows, and borders for stunning designs.
+                </p>
+                <div className="text-purple-600 hover:text-purple-700 font-medium text-sm flex items-center">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
             <Card className="p-6 hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                 <BookOpen className="w-6 h-6 text-blue-600" />
               </div>
-              <h4 className="text-lg font-semibold text-slate-900 mb-3">Getting Started with Brat Generator</h4>
+              <h4 className="text-lg font-semibold text-slate-900 mb-3">Design Tutorials & Guides</h4>
               <p className="text-slate-600 mb-4">
-                New to Brat Generator? Our beginner's guide walks you through the basics of creating your first design with our Brat Generator platform.
+                Learn professional design techniques and creative workflows. Master the art of creating stunning visuals with our comprehensive guides.
               </p>
               <Link href="/blog" className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center">
                 Learn More <ChevronRight className="w-3 h-3 ml-1" />
               </Link>
             </Card>
             <Card className="p-6 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                <Sparkles className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                <Palette className="w-6 h-6 text-green-600" />
               </div>
-              <h4 className="text-lg font-semibold text-slate-900 mb-3">Advanced Brat Text Generator Techniques</h4>
+              <h4 className="text-lg font-semibold text-slate-900 mb-3">Color & Typography Tips</h4>
               <p className="text-slate-600 mb-4">
-                Take your designs to the next level with advanced tips for using Brat Text Generator. Learn professional techniques and creative workflows.
+                Master color theory and typography principles. Discover how to choose perfect combinations and create visually stunning designs.
               </p>
-              <Link href="/blog" className="text-purple-600 hover:text-purple-700 font-medium text-sm flex items-center">
-                Explore <ChevronRight className="w-3 h-3 ml-1" />
-              </Link>
-            </Card>
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
-                <Palette className="w-6 h-6 text-pink-600" />
-              </div>
-              <h4 className="text-lg font-semibold text-slate-900 mb-3">Brat Generator Color & Design Guide</h4>
-              <p className="text-slate-600 mb-4">
-                Master color theory and design principles with Brat Generator. Discover how to choose colors and create visually stunning artwork.
-              </p>
-              <Link href="/blog" className="text-pink-600 hover:text-pink-700 font-medium text-sm flex items-center">
+              <Link href="/blog" className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center">
                 Discover <ChevronRight className="w-3 h-3 ml-1" />
               </Link>
             </Card>
             <Card className="p-6 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                <Users className="w-6 h-6 text-green-600" />
-              </div>
-              <h4 className="text-lg font-semibold text-slate-900 mb-3">Brat Generator Community Showcase</h4>
-              <p className="text-slate-600 mb-4">
-                Get inspired by amazing designs created by our community. See how others use Brat Generator to bring their creative visions to life.
-              </p>
-              <Link href="/blog" className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center">
-                View Gallery <ChevronRight className="w-3 h-3 ml-1" />
-              </Link>
-            </Card>
-            <Card className="p-6 hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                <Zap className="w-6 h-6 text-orange-600" />
+                <Star className="w-6 h-6 text-orange-600" />
               </div>
-              <h4 className="text-lg font-semibold text-slate-900 mb-3">Brat Text Generator Tips & Tricks</h4>
+              <h4 className="text-lg font-semibold text-slate-900 mb-3">Creative Inspiration</h4>
               <p className="text-slate-600 mb-4">
-                Unlock hidden features and productivity hacks with Brat Text Generator. Learn shortcuts and pro tips to work faster and smarter.
+                Stay updated with the latest design trends and creative inspiration. Explore trending styles and innovative techniques.
               </p>
               <Link href="/blog" className="text-orange-600 hover:text-orange-700 font-medium text-sm flex items-center">
-                Read Tips <ChevronRight className="w-3 h-3 ml-1" />
-              </Link>
-            </Card>
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
-                <Star className="w-6 h-6 text-red-600" />
-              </div>
-              <h4 className="text-lg font-semibold text-slate-900 mb-3">Brat Generator Inspiration & Trends</h4>
-              <p className="text-slate-600 mb-4">
-                Stay updated with the latest design trends and creative inspiration for Brat Generator. Explore what's trending in the community.
-              </p>
-              <Link href="/blog" className="text-red-600 hover:text-red-700 font-medium text-sm flex items-center">
                 Explore <ChevronRight className="w-3 h-3 ml-1" />
               </Link>
             </Card>
@@ -2048,7 +2026,7 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <h5 className="font-semibold mb-4">Brat Generator Tools</h5>
+              <h5 className="font-semibold mb-4">Our Generators</h5>
               <ul className="space-y-2 text-slate-400">
                 <li>
                   <a
@@ -2063,16 +2041,12 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#generator"
-                    className="hover:text-white transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.getElementById('generator')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
+                  <Link
+                    href="/generators/glitter-text"
+                    className="hover:text-white transition-colors"
                   >
-                    Brat Text Generator
-                  </a>
+                    Glitter Text Generator
+                  </Link>
                 </li>
               </ul>
             </div>
