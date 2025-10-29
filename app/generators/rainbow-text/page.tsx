@@ -180,11 +180,11 @@ export default function RainbowTextGenerator() {
     setIsDownloading(true);
     try {
       const canvas = await html2canvas(previewRef.current, {
-        scale: 2,
+        scale: 2 as any,
         backgroundColor: null,
         logging: false,
         useCORS: true,
-      });
+      } as any);
 
       const link = document.createElement('a');
       link.download = `rainbow-text-${Date.now()}.png`;
