@@ -96,7 +96,7 @@ export default function Home() {
     // Fetch blog posts asynchronously
     const loadPosts = async () => {
       try {
-        const response = await fetch('/api/blog/posts?action=latest&limit=3');
+        const response = await fetch('/api/blog/posts?action=latest&limit=6');
         if (response.ok) {
           const posts = await response.json();
           setLatestPosts(posts);
@@ -1516,7 +1516,7 @@ export default function Home() {
                 Get the latest design trends, tutorials, and insights from our team of creative experts.
               </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {latestPosts.map((post) => (
                 <Card key={post.slug} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
                   <div className="aspect-video relative overflow-hidden">
@@ -1524,7 +1524,7 @@ export default function Home() {
                       src={post.image}
                       alt={post.imageAlt}
                       fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                       priority
                     />
