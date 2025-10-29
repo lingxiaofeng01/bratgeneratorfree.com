@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Sparkles, Download, Menu, X, Copy, Check, Smile, Zap, Star, ChevronRight, RefreshCw } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -81,54 +81,54 @@ export default function SpongeBobTextGenerator() {
   const [copied, setCopied] = useState(false);
 
   // Apply character map to text
-  const applyCharMap = (map: Record<string, string>, text: string): string => {
+  const applyCharMap = useCallback((map: Record<string, string>, text: string): string => {
     return text.split('').map(c => map[c] || map[c.toLowerCase()] || c).join('');
-  };
+  }, []);
 
   // Convert text based on selected mode
-  const convertText = (text: string, mode: string): string => {
+  const convertText = useCallback((text: string, mode: string): string => {
     if (!text) return '';
 
     switch (mode) {
       case 'random':
         return text.split('').map(c => Math.random() < 0.5 ? c.toUpperCase() : c.toLowerCase()).join('');
-      
+
       case 'alternating': {
         const offset = Math.round(Math.random());
         return text.split('').map((c, i) => (i + offset) % 2 === 0 ? c.toUpperCase() : c.toLowerCase()).join('');
       }
-      
+
       case 'random-bold': {
         const randomCase = text.split('').map(c => Math.random() < 0.5 ? c.toUpperCase() : c.toLowerCase()).join('');
         return applyCharMap(BOLD_SANS_MAP, randomCase);
       }
-      
+
       case 'alternating-bold': {
         const offset = Math.round(Math.random());
         const alternatingCase = text.split('').map((c, i) => (i + offset) % 2 === 0 ? c.toUpperCase() : c.toLowerCase()).join('');
         return applyCharMap(BOLD_SANS_MAP, alternatingCase);
       }
-      
+
       case 'random-italic': {
         const randomCase = text.split('').map(c => Math.random() < 0.5 ? c.toUpperCase() : c.toLowerCase()).join('');
         return applyCharMap(ITALIC_MAP, randomCase);
       }
-      
+
       case 'alternating-italic': {
         const offset = Math.round(Math.random());
         const alternatingCase = text.split('').map((c, i) => (i + offset) % 2 === 0 ? c.toUpperCase() : c.toLowerCase()).join('');
         return applyCharMap(ITALIC_MAP, alternatingCase);
       }
-      
+
       default:
         return text;
     }
-  };
+  }, [applyCharMap]);
 
   // Update output when input or mode changes
   useEffect(() => {
     setOutputText(convertText(inputText, selectedMode));
-  }, [inputText, selectedMode]);
+  }, [inputText, selectedMode, convertText]);
 
   // Copy to clipboard
   const handleCopy = async () => {

@@ -491,7 +491,7 @@ export default function DisneyTextGenerator() {
                 <canvas
                   ref={canvasRef}
                   className="max-w-full max-h-full object-contain"
-                  style={{ imageRendering: 'high-quality' }}
+                  style={{ imageRendering: 'auto' }}
                 />
               )}
             </div>
