@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile } from 'lucide-react';
+import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
 
@@ -18,6 +18,16 @@ export default function GeneratorsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const generators = [
+    {
+      title: 'Alien Text Generator',
+      description: 'Transform your text into alien fonts with 10+ unique extraterrestrial styles. Perfect for sci-fi designs, games, and creative projects.',
+      icon: Rocket,
+      href: '/generators/alien-text',
+      gradient: 'from-purple-500 to-green-500',
+      bgGradient: 'from-purple-50 to-green-50',
+      borderColor: 'border-purple-200',
+      features: ['10+ Alien Fonts', 'Full Customization', 'Glow Effects', 'Free Download']
+    },
     {
       title: 'Glitter Text Generator',
       description: 'Create dazzling glitter text with 176+ unique effects. Customize fonts, sizes, angles, shadows, and borders for stunning designs.',

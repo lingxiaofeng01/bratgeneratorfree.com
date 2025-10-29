@@ -21,8 +21,21 @@ export async function GET() {
         changeFrequency: 'weekly' as const,
         priority: 0.95,
       },
+      // Generators - sorted by creation date (newest first)
       {
-        url: `${baseUrl}/generators/glitter-text`,
+        url: `${baseUrl}/generators/alien-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
+        url: `${baseUrl}/generators/spongebob-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
+        url: `${baseUrl}/generators/mirror-text`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'weekly' as const,
         priority: 0.95,
@@ -46,13 +59,7 @@ export async function GET() {
         priority: 0.95,
       },
       {
-        url: `${baseUrl}/generators/mirror-text`,
-        lastModified: new Date().toISOString(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.95,
-      },
-      {
-        url: `${baseUrl}/generators/spongebob-text`,
+        url: `${baseUrl}/generators/glitter-text`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'weekly' as const,
         priority: 0.95,
@@ -166,7 +173,19 @@ ${allUrls
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>${baseUrl}/generators/glitter-text</loc>
+    <loc>${baseUrl}/generators/alien-text</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/generators/spongebob-text</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/generators/mirror-text</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -190,13 +209,7 @@ ${allUrls
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>${baseUrl}/generators/mirror-text</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>${baseUrl}/generators/spongebob-text</loc>
+    <loc>${baseUrl}/generators/glitter-text</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>

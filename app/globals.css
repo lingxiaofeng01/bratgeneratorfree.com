@@ -81,6 +81,67 @@
   }
 }
 
+/* Alien Fonts */
+@font-face {
+  font-family: 'Alien Android';
+  src: url('/fonts/alien/Alien Android.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alien Beasts';
+  src: url('/fonts/alien/Alien Beasts.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alien Faces';
+  src: url('/fonts/alien/Alien faces St.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alien Dot';
+  src: url('/fonts/alien/AlienDot.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alien Fur';
+  src: url('/fonts/alien/AlienFur.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alien Sweater';
+  src: url('/fonts/alien/AlienSweater.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alien Waffle';
+  src: url('/fonts/alien/AlienWaffle.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alien Classic';
+  src: url('/fonts/alien/alien.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alien Double';
+  src: url('/fonts/alien/alien_double.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alien Coxy';
+  src: url('/fonts/alien/aliendcoxy.ttf') format('truetype');
+  font-display: swap;
+}
+
 /* Markdown 内容样式 */
 .prose {
   @apply text-slate-700 leading-relaxed;
