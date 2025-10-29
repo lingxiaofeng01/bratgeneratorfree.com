@@ -1,18 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, Skull, ChevronRight, Menu, X } from 'lucide-react';
+import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
 
 export default function GeneratorsPage() {
   useEffect(() => {
-    document.title = 'Free Text Generators - Glitter Text, Dark Souls & More';
+    document.title = 'Free Text Generators - Glitter Text, Mirror Text, Dark Souls & More';
 
     // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Explore our collection of free online text generators. Create glitter text, Dark Souls messages, and more. No signup required, instant download.');
+      metaDescription.setAttribute('content', 'Explore our collection of free online text generators. Create glitter text, mirror text, Dark Souls messages, and more. No signup required, instant download.');
     }
   }, []);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,6 +29,26 @@ export default function GeneratorsPage() {
       features: ['176+ Glitter Effects', 'Custom Fonts & Sizes', 'Instant Download', 'No Watermarks']
     },
     {
+      title: 'Disney Text Generator',
+      description: 'Create magical Disney-style text with 8 authentic fonts and 4 stunning presets. Customize colors, sizes, and download instantly.',
+      icon: Sparkles,
+      href: '/generators/disney-text',
+      gradient: 'from-blue-500 to-purple-500',
+      bgGradient: 'from-blue-50 to-purple-50',
+      borderColor: 'border-blue-200',
+      features: ['8 Disney Fonts', '4 Style Presets', 'Full Customization', 'Free Download']
+    },
+    {
+      title: 'Underline Text Generator',
+      description: 'Transform your text with 20 beautiful underline styles. Perfect for social media, messaging apps, and creative designs.',
+      icon: Sparkles,
+      href: '/generators/underline-text',
+      gradient: 'from-indigo-500 to-purple-500',
+      bgGradient: 'from-indigo-50 to-purple-50',
+      borderColor: 'border-indigo-200',
+      features: ['20 Premium Styles', 'One-Click Copy', 'Universal Compatibility', '100% Free']
+    },
+    {
       title: 'Dark Souls Text Generator',
       description: 'Create iconic Dark Souls text messages like "YOU DIED" and "VICTORY ACHIEVED". Perfect for gaming memes and content.',
       icon: Skull,
@@ -37,6 +57,16 @@ export default function GeneratorsPage() {
       bgGradient: 'from-slate-50 to-slate-100',
       borderColor: 'border-slate-200',
       features: ['3 Classic Styles', 'Custom Messages', 'Glow Effects', 'High Quality PNG']
+    },
+    {
+      title: 'Mirror Text Generator',
+      description: 'Create stunning mirrored text effects instantly. Horizontal, vertical, and reverse text transformations. Perfect for social media and creative designs.',
+      icon: FlipHorizontal,
+      href: '/generators/mirror-text',
+      gradient: 'from-indigo-500 to-purple-500',
+      bgGradient: 'from-indigo-50 to-purple-50',
+      borderColor: 'border-indigo-200',
+      features: ['4 Mirror Modes', 'Real-time Preview', 'One-Click Copy', 'Unicode Support']
     }
   ];
 
@@ -243,6 +273,11 @@ export default function GeneratorsPage() {
                 <li>
                   <Link href="/generators/glitter-text" className="hover:text-white transition-colors">
                     Glitter Text Generator
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/generators/disney-text" className="hover:text-white transition-colors">
+                    Disney Text Generator
                   </Link>
                 </li>
                 <li>

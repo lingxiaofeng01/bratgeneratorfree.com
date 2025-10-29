@@ -28,7 +28,25 @@ export async function GET() {
         priority: 0.95,
       },
       {
+        url: `${baseUrl}/generators/disney-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
+        url: `${baseUrl}/generators/underline-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
         url: `${baseUrl}/generators/dark-souls-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
+        url: `${baseUrl}/generators/mirror-text`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'weekly' as const,
         priority: 0.95,
@@ -148,7 +166,25 @@ ${allUrls
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>${baseUrl}/generators/disney-text</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/generators/underline-text</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>${baseUrl}/generators/dark-souls-text</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/generators/mirror-text</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
