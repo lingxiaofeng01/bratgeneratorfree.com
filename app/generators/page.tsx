@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal } from 'lucide-react';
+import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
 
@@ -67,6 +67,16 @@ export default function GeneratorsPage() {
       bgGradient: 'from-indigo-50 to-purple-50',
       borderColor: 'border-indigo-200',
       features: ['4 Mirror Modes', 'Real-time Preview', 'One-Click Copy', 'Unicode Support']
+    },
+    {
+      title: 'SpongeBob Text Generator',
+      description: 'Create hilarious SpongeBob mocking text with 6 conversion modes including random case, alternating case, bold, and italic. Perfect for memes and social media.',
+      icon: Smile,
+      href: '/generators/spongebob-text',
+      gradient: 'from-yellow-500 to-blue-500',
+      bgGradient: 'from-yellow-50 to-blue-50',
+      borderColor: 'border-yellow-200',
+      features: ['6 Conversion Modes', 'Instant Copy', 'Meme Ready', '100% Free']
     }
   ];
 

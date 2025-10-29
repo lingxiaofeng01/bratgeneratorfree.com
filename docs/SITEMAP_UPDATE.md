@@ -39,20 +39,27 @@
 
 ### Priority 分级
 - **1.0** - 首页（最高优先级）
-- **0.95** - Glitter Text Generator（唯一的生成器页面，核心功能）
+- **0.95** - 所有生成器页面（核心功能）
+  - Generators 主页
+  - Glitter Text Generator
+  - Disney Text Generator
+  - Underline Text Generator
+  - Dark Souls Text Generator
+  - Mirror Text Generator
+  - SpongeBob Text Generator ⭐ 最新
 - **0.9** - Blog 列表页
 - **0.8** - About 页面
 - **0.7** - Contact 页面
 - **0.5** - 法律页面（Privacy, Terms）
 - **0.7-0.9** - Blog 文章（根据特征动态调整）
 
-### 为什么 Glitter Text Generator 优先级是 0.95？
+### 为什么所有生成器优先级都是 0.95？
 1. 完整的 SEO 优化（TDK + H 标签）
-2. 2000+ 单词的高质量内容
+2. 高质量内容（1500-2000+ 单词）
 3. 独特的功能价值
 4. 目标关键词竞争力强
 5. 预期流量高
-6. 目前唯一完成的生成器专题页面
+6. 核心产品功能页面
 
 ---
 
@@ -71,13 +78,19 @@
 ```
 网站根目录
 ├── / (首页) - Priority: 1.0, daily
-├── /blog - Priority: 0.9, daily
+├── /generators - Priority: 0.95, weekly
 ├── /generators/
-│   └── glitter-text - Priority: 0.95, weekly ⭐ 新增
+│   ├── glitter-text - Priority: 0.95, weekly
+│   ├── disney-text - Priority: 0.95, weekly
+│   ├── underline-text - Priority: 0.95, weekly
+│   ├── dark-souls-text - Priority: 0.95, weekly
+│   ├── mirror-text - Priority: 0.95, weekly
+│   └── spongebob-text - Priority: 0.95, weekly ⭐ 最新
+├── /blog - Priority: 0.9, daily
 ├── /about - Priority: 0.8, monthly
-├── /contact - Priority: 0.7, monthly ⭐ 新增
-├── /privacy - Priority: 0.5, yearly ⭐ 新增
-├── /terms - Priority: 0.5, yearly ⭐ 新增
+├── /contact - Priority: 0.7, monthly
+├── /privacy - Priority: 0.5, yearly
+├── /terms - Priority: 0.5, yearly
 └── /blog/[slug] - Priority: 0.7-0.9 (动态), weekly/monthly
 ```
 
@@ -209,14 +222,21 @@ headers: {
 
 ## ✅ 验证清单
 
-- [x] 添加 Glitter Text Generator 页面
-- [x] 移除未完成的 Generator 页面
+- [x] 添加所有 6 个生成器页面
+  - [x] Glitter Text Generator
+  - [x] Disney Text Generator
+  - [x] Underline Text Generator
+  - [x] Dark Souls Text Generator
+  - [x] Mirror Text Generator
+  - [x] SpongeBob Text Generator ⭐ 最新
+- [x] 添加 Generators 主页
 - [x] 添加 Contact、Privacy、Terms 页面
 - [x] 设置合理的优先级
 - [x] 设置合理的更新频率
-- [x] 更新错误处理的基础 sitemap
+- [x] 更新错误处理的备用 sitemap
 - [x] 验证 XML 格式正确
 - [x] 测试 sitemap 可访问性
+- [x] 确保所有页面在备用 sitemap 中
 
 ---
 
@@ -230,7 +250,48 @@ headers: {
 
 ---
 
-**更新日期**: 2025-10-28
+---
+
+## 🆕 最新更新 (2025-10-29)
+
+### 新增生成器页面
+已将以下生成器页面添加到 sitemap:
+
+1. **Disney Text Generator**
+   - URL: `/generators/disney-text`
+   - Priority: 0.95
+   - Change Frequency: weekly
+
+2. **Underline Text Generator**
+   - URL: `/generators/underline-text`
+   - Priority: 0.95
+   - Change Frequency: weekly
+
+3. **Dark Souls Text Generator**
+   - URL: `/generators/dark-souls-text`
+   - Priority: 0.95
+   - Change Frequency: weekly
+
+4. **Mirror Text Generator**
+   - URL: `/generators/mirror-text`
+   - Priority: 0.95
+   - Change Frequency: weekly
+
+5. **SpongeBob Text Generator** ⭐ 最新
+   - URL: `/generators/spongebob-text`
+   - Priority: 0.95
+   - Change Frequency: weekly
+
+### 错误处理改进
+更新了备用 sitemap (错误处理时使用),确保包含:
+- ✅ 所有 6 个生成器页面
+- ✅ SpongeBob Text Generator
+- ✅ Contact、Privacy、Terms 页面
+- ✅ 完整的静态页面覆盖
+
+---
+
+**更新日期**: 2025-10-29
 **更新状态**: ✅ 完成
-**影响页面**: 新增 4 个页面到 sitemap，移除 2 个未完成页面
+**影响页面**: 新增 5 个生成器页面到 sitemap,完善错误处理备用 sitemap
 

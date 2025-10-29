@@ -1559,8 +1559,11 @@ export default function Home() {
           </div>
             <div className="text-center mt-12">
               <Link href="/blog">
-                <Button variant="outline" size="lg">
-                  View All Posts <ChevronRight className="w-4 h-4 ml-2" />
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-lime-500 to-emerald-500 hover:from-lime-600 hover:to-emerald-600 text-white font-semibold px-8 py-6 text-base shadow-lg hover:shadow-xl transition-all"
+                >
+                  View All Posts <ChevronRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
             </div>
@@ -1840,72 +1843,86 @@ export default function Home() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Link href="/generators/glitter-text">
-              <Card className="p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200">
+            <Link href="/generators/glitter-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 flex flex-col">
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-4">
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">Glitter Text Generator</h4>
-                <p className="text-slate-600 mb-4">
+                <p className="text-slate-600 mb-4 flex-grow">
                   Create dazzling glitter text with 176+ unique effects. Customize fonts, sizes, angles, shadows, and borders for stunning designs.
                 </p>
-                <div className="text-purple-600 hover:text-purple-700 font-medium text-sm flex items-center">
+                <div className="text-purple-600 hover:text-purple-700 font-medium text-sm flex items-center mt-auto">
                   Try Now <ChevronRight className="w-3 h-3 ml-1" />
                 </div>
               </Card>
             </Link>
-            <Link href="/generators/dark-souls-text">
-              <Card className="p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-200">
+            <Link href="/generators/dark-souls-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-200 flex flex-col">
                 <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-slate-800 rounded-lg flex items-center justify-center mb-4">
                   <Skull className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">Dark Souls Text Generator</h4>
-                <p className="text-slate-600 mb-4">
+                <p className="text-slate-600 mb-4 flex-grow">
                   Create iconic Dark Souls text messages like "YOU DIED" and "VICTORY ACHIEVED". Perfect for gaming memes and content.
                 </p>
-                <div className="text-red-600 hover:text-red-700 font-medium text-sm flex items-center">
+                <div className="text-red-600 hover:text-red-700 font-medium text-sm flex items-center mt-auto">
                   Try Now <ChevronRight className="w-3 h-3 ml-1" />
                 </div>
               </Card>
             </Link>
-            <Link href="/generators/underline-text">
-              <Card className="p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200">
+            <Link href="/generators/underline-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200 flex flex-col">
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
                   <Type className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">Underline Text Generator</h4>
-                <p className="text-slate-600 mb-4">
+                <p className="text-slate-600 mb-4 flex-grow">
                   Create stunning underlined text with 20+ unique styles. Perfect for social media, messaging apps, and creative projects.
                 </p>
-                <div className="text-indigo-600 hover:text-indigo-700 font-medium text-sm flex items-center">
+                <div className="text-indigo-600 hover:text-indigo-700 font-medium text-sm flex items-center mt-auto">
                   Try Now <ChevronRight className="w-3 h-3 ml-1" />
                 </div>
               </Card>
             </Link>
-            <Link href="/generators/disney-text">
-              <Card className="p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200">
+            <Link href="/generators/disney-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200 flex flex-col">
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">Disney Text Generator</h4>
-                <p className="text-slate-600 mb-4">
+                <p className="text-slate-600 mb-4 flex-grow">
                   Create magical Disney-style text with 8 authentic fonts and 4 stunning presets. Customize and download instantly!
                 </p>
-                <div className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center">
+                <div className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center mt-auto">
                   Try Now <ChevronRight className="w-3 h-3 ml-1" />
                 </div>
               </Card>
             </Link>
-            <Link href="/generators/mirror-text">
-              <Card className="p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200">
+            <Link href="/generators/mirror-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200 flex flex-col">
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
                   <FlipHorizontal className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">Mirror Text Generator</h4>
-                <p className="text-slate-600 mb-4">
+                <p className="text-slate-600 mb-4 flex-grow">
                   Create stunning mirrored text effects instantly. Horizontal, vertical, and reverse text transformations. Perfect for social media and creative designs.
                 </p>
-                <div className="text-indigo-600 hover:text-indigo-700 font-medium text-sm flex items-center">
+                <div className="text-indigo-600 hover:text-indigo-700 font-medium text-sm flex items-center mt-auto">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
+            <Link href="/generators/spongebob-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-yellow-50 to-blue-50 border-2 border-yellow-200 flex flex-col">
+                <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-blue-500 rounded-lg flex items-center justify-center mb-4">
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-lg font-semibold text-slate-900 mb-3">SpongeBob Text Generator</h4>
+                <p className="text-slate-600 mb-4 flex-grow">
+                  Create hilarious SpongeBob mocking text with 6 conversion modes. Perfect for memes, social media, and adding sarcastic tone to messages.
+                </p>
+                <div className="text-yellow-600 hover:text-yellow-700 font-medium text-sm flex items-center mt-auto">
                   Try Now <ChevronRight className="w-3 h-3 ml-1" />
                 </div>
               </Card>
