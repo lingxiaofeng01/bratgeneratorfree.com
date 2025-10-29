@@ -1868,30 +1868,48 @@ export default function Home() {
                 </div>
               </Card>
             </Link>
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                <Palette className="w-6 h-6 text-green-600" />
-              </div>
-              <h4 className="text-lg font-semibold text-slate-900 mb-3">Color & Typography Tips</h4>
-              <p className="text-slate-600 mb-4">
-                Master color theory and typography principles. Discover how to choose perfect combinations and create visually stunning designs.
-              </p>
-              <Link href="/blog" className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center">
-                Discover <ChevronRight className="w-3 h-3 ml-1" />
-              </Link>
-            </Card>
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                <Star className="w-6 h-6 text-orange-600" />
-              </div>
-              <h4 className="text-lg font-semibold text-slate-900 mb-3">Creative Inspiration</h4>
-              <p className="text-slate-600 mb-4">
-                Stay updated with the latest design trends and creative inspiration. Explore trending styles and innovative techniques.
-              </p>
-              <Link href="/blog" className="text-orange-600 hover:text-orange-700 font-medium text-sm flex items-center">
-                Explore <ChevronRight className="w-3 h-3 ml-1" />
-              </Link>
-            </Card>
+            <Link href="/generators/underline-text">
+              <Card className="p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200">
+                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
+                  <Type className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-lg font-semibold text-slate-900 mb-3">Underline Text Generator</h4>
+                <p className="text-slate-600 mb-4">
+                  Create stunning underlined text with 20+ unique styles. Perfect for social media, messaging apps, and creative projects.
+                </p>
+                <div className="text-indigo-600 hover:text-indigo-700 font-medium text-sm flex items-center">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
+            <Link href="/generators/disney-text">
+              <Card className="p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-lg font-semibold text-slate-900 mb-3">Disney Text Generator</h4>
+                <p className="text-slate-600 mb-4">
+                  Create magical Disney-style text with 8 authentic fonts and 4 stunning presets. Customize and download instantly!
+                </p>
+                <div className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
+            <Link href="/generators/mirror-text">
+              <Card className="p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200">
+                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
+                  <FlipHorizontal className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-lg font-semibold text-slate-900 mb-3">Mirror Text Generator</h4>
+                <p className="text-slate-600 mb-4">
+                  Create stunning mirrored text effects instantly. Horizontal, vertical, and reverse text transformations. Perfect for social media and creative designs.
+                </p>
+                <div className="text-indigo-600 hover:text-indigo-700 font-medium text-sm flex items-center">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
           </div>
         </section>
 
