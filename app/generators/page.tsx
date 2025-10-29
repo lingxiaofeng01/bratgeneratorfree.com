@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket } from 'lucide-react';
+import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket, Rainbow } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
 
@@ -18,6 +18,16 @@ export default function GeneratorsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const generators = [
+    {
+      title: 'Rainbow Text Generator',
+      description: 'Create stunning rainbow text with 6+ unique fonts and 6 gradient presets. Customize colors, effects, and download instantly - completely free!',
+      icon: Rainbow,
+      href: '/generators/rainbow-text',
+      gradient: 'from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500',
+      bgGradient: 'from-pink-50 via-purple-50 to-blue-50',
+      borderColor: 'border-purple-200',
+      features: ['6+ Rainbow Fonts', '6 Gradient Presets', 'Full Customization', 'Instant Download']
+    },
     {
       title: 'Alien Text Generator',
       description: 'Transform your text into alien fonts with 10+ unique extraterrestrial styles. Perfect for sci-fi designs, games, and creative projects.',

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
-import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard, Skull, Rocket } from 'lucide-react';
+import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard, Skull, Rocket, Rainbow } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -1843,7 +1843,22 @@ export default function Home() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Alien Text Generator - Latest */}
+            {/* Rainbow Text Generator - Latest */}
+            <Link href="/generators/rainbow-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 border-2 border-purple-200 flex flex-col">
+                <div className="w-12 h-12 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
+                  <Rainbow className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">Rainbow Text Generator</h3>
+                <p className="text-slate-600 mb-4 flex-grow">
+                  Create stunning rainbow text with 6+ unique fonts and 6 gradient presets. Customize colors, effects, and download instantly!
+                </p>
+                <div className="text-purple-600 hover:text-purple-700 font-medium text-sm flex items-center mt-auto">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
+            {/* Alien Text Generator */}
             <Link href="/generators/alien-text" className="h-full">
               <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-purple-50 to-green-50 border-2 border-purple-200 flex flex-col">
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-green-500 rounded-lg flex items-center justify-center mb-4">

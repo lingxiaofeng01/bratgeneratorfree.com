@@ -23,6 +23,12 @@ export async function GET() {
       },
       // Generators - sorted by creation date (newest first)
       {
+        url: `${baseUrl}/generators/rainbow-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
         url: `${baseUrl}/generators/alien-text`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'weekly' as const,
@@ -168,6 +174,12 @@ ${allUrls
   </url>
   <url>
     <loc>${baseUrl}/generators</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/generators/rainbow-text</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
