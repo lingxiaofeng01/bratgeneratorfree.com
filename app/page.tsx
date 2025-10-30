@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
-import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard, Skull, Rocket, Rainbow, Flame } from 'lucide-react';
+import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard, Skull, Rocket, Rainbow, Flame, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -1843,7 +1843,40 @@ export default function Home() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Fiery Text Generator - Latest */}
+            {/* Redacted Text Generator - NEW */}
+            <Link href="/generators/redacted-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-blue-50 via-cyan-50 to-purple-50 border-2 border-blue-200 flex flex-col relative overflow-hidden">
+                <div className="absolute top-2 right-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  NEW
+                </div>
+                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 via-cyan-600 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                  <Shield className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">Redacted Text Generator</h3>
+                <p className="text-slate-600 mb-4 flex-grow">
+                  Free, private text redaction tool. Hide sensitive information instantly. Redact emails, URLs, phone numbers with 100% client-side processing!
+                </p>
+                <div className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center mt-auto">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
+            {/* Corrupted Text Generator */}
+            <Link href="/generators/corrupted-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-purple-50 via-pink-50 to-red-50 border-2 border-purple-200 flex flex-col">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 rounded-lg flex items-center justify-center mb-4">
+                  <Zap className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">Corrupted Text Generator</h3>
+                <p className="text-slate-600 mb-4 flex-grow">
+                  Create creepy corrupted text, Zalgo text, and glitch effects with advanced controls. UnZalgo feature included!
+                </p>
+                <div className="text-purple-600 hover:text-purple-700 font-medium text-sm flex items-center mt-auto">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
+            {/* Fiery Text Generator */}
             <Link href="/generators/fiery-text" className="h-full">
               <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50 border-2 border-orange-200 flex flex-col">
                 <div className="w-12 h-12 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 rounded-lg flex items-center justify-center mb-4">
@@ -1888,21 +1921,6 @@ export default function Home() {
                 </div>
               </Card>
             </Link>
-            {/* SpongeBob Text Generator */}
-            <Link href="/generators/spongebob-text" className="h-full">
-              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-yellow-50 to-blue-50 border-2 border-yellow-200 flex flex-col">
-                <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-blue-500 rounded-lg flex items-center justify-center mb-4">
-                  <Sparkles className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">SpongeBob Text Generator</h3>
-                <p className="text-slate-600 mb-4 flex-grow">
-                  Create hilarious SpongeBob mocking text with 6 conversion modes. Perfect for memes, social media, and adding sarcastic tone to messages.
-                </p>
-                <div className="text-yellow-600 hover:text-yellow-700 font-medium text-sm flex items-center mt-auto">
-                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
-                </div>
-              </Card>
-            </Link>
             {/* Mirror Text Generator */}
             <Link href="/generators/mirror-text" className="h-full">
               <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200 flex flex-col">
@@ -1914,21 +1932,6 @@ export default function Home() {
                   Create stunning mirrored text effects instantly. Horizontal, vertical, and reverse text transformations. Perfect for social media and creative designs.
                 </p>
                 <div className="text-indigo-600 hover:text-indigo-700 font-medium text-sm flex items-center mt-auto">
-                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
-                </div>
-              </Card>
-            </Link>
-            {/* Disney Text Generator */}
-            <Link href="/generators/disney-text" className="h-full">
-              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200 flex flex-col">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
-                  <Sparkles className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">Disney Text Generator</h3>
-                <p className="text-slate-600 mb-4 flex-grow">
-                  Create magical Disney-style text with 8 authentic fonts and 4 stunning presets. Customize and download instantly!
-                </p>
-                <div className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center mt-auto">
                   Try Now <ChevronRight className="w-3 h-3 ml-1" />
                 </div>
               </Card>

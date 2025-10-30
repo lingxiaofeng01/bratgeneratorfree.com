@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket, Rainbow, Gamepad2, Flame } from 'lucide-react';
+import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket, Rainbow, Gamepad2, Flame, Zap, Shield } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
 
@@ -18,6 +18,26 @@ export default function GeneratorsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const generators = [
+    {
+      title: 'Redacted Text Generator',
+      description: 'Free, private text redaction tool. Hide sensitive information instantly. Redact emails, URLs, phone numbers with client-side processing. 100% secure and private!',
+      icon: Shield,
+      href: '/generators/redacted-text',
+      gradient: 'from-blue-600 via-cyan-600 to-purple-600',
+      bgGradient: 'from-blue-50 via-cyan-50 to-purple-50',
+      borderColor: 'border-blue-200',
+      features: ['100% Private', 'Auto Email/URL Detection', 'Advanced Controls', 'Instant Copy & Download']
+    },
+    {
+      title: 'Corrupted Text Generator',
+      description: 'Create creepy corrupted text, Zalgo text, and glitch effects with advanced controls. Customize top, middle, bottom corruption. UnZalgo feature included!',
+      icon: Zap,
+      href: '/generators/corrupted-text',
+      gradient: 'from-purple-600 via-pink-600 to-red-600',
+      bgGradient: 'from-purple-50 via-pink-50 to-red-50',
+      borderColor: 'border-purple-200',
+      features: ['6 Quick Presets', 'Advanced Controls', 'UnZalgo Mode', 'Instant Copy']
+    },
     {
       title: 'Fiery Text Generator',
       description: 'Create blazing hot fiery text with 2 authentic fiery fonts and 6 fire color presets. Customize glow effects and download instantly - 100% free!',
