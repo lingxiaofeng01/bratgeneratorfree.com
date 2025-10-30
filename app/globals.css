@@ -142,6 +142,50 @@
   font-display: swap;
 }
 
+/* Super Mario Fonts */
+@font-face {
+  font-family: 'Super Mario Bros';
+  src: url('/fonts/Super Mario/Super Mario Bros..ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Super Mario 64 DS';
+  src: url('/fonts/Super Mario/Super-Mario-64-DS.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Super Mario 256';
+  src: url('/fonts/Super Mario/SuperMario256.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SMB Font';
+  src: url('/fonts/Super Mario/smbfont.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Super Mario World';
+  src: url('/fonts/Super Mario/smw.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* Fiery Fonts */
+@font-face {
+  font-family: 'Fiery Sun Demo';
+  src: url('/fonts/fiery/Fiery Sun Demo.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fiery Turk';
+  src: url('/fonts/fiery/Fiery_Turk.ttf') format('truetype');
+  font-display: swap;
+}
+
 /* Markdown 内容样式 */
 .prose {
   @apply text-slate-700 leading-relaxed;

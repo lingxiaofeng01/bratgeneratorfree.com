@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket, Rainbow } from 'lucide-react';
+import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket, Rainbow, Gamepad2, Flame } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
 
@@ -18,6 +18,26 @@ export default function GeneratorsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const generators = [
+    {
+      title: 'Fiery Text Generator',
+      description: 'Create blazing hot fiery text with 2 authentic fiery fonts and 6 fire color presets. Customize glow effects and download instantly - 100% free!',
+      icon: Flame,
+      href: '/generators/fiery-text',
+      gradient: 'from-orange-500 via-red-500 to-yellow-500',
+      bgGradient: 'from-orange-50 via-red-50 to-yellow-50',
+      borderColor: 'border-orange-200',
+      features: ['2 Fiery Fonts', '6 Fire Presets', 'Glow Effects', 'Free Download']
+    },
+    {
+      title: 'Super Mario Text Generator',
+      description: 'Create authentic Super Mario-style text with 5 iconic fonts from the Mushroom Kingdom. Customize colors, add effects, and download instantly!',
+      icon: Gamepad2,
+      href: '/generators/mario-text',
+      gradient: 'from-red-500 to-blue-500',
+      bgGradient: 'from-red-50 via-yellow-50 to-blue-50',
+      borderColor: 'border-red-200',
+      features: ['5 Mario Fonts', '6 Color Presets', 'Custom Effects', 'Free Download']
+    },
     {
       title: 'Rainbow Text Generator',
       description: 'Create stunning rainbow text with 6+ unique fonts and 6 gradient presets. Customize colors, effects, and download instantly - completely free!',
