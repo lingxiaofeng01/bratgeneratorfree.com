@@ -23,6 +23,18 @@ export async function GET() {
       },
       // Generators - sorted by creation date (newest first)
       {
+        url: `${baseUrl}/generators/fiery-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
+        url: `${baseUrl}/generators/mario-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
         url: `${baseUrl}/generators/rainbow-text`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'weekly' as const,
@@ -174,6 +186,18 @@ ${allUrls
   </url>
   <url>
     <loc>${baseUrl}/generators</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/generators/fiery-text</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/generators/mario-text</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>

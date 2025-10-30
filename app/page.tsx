@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
-import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard, Skull, Rocket, Rainbow } from 'lucide-react';
+import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard, Skull, Rocket, Rainbow, Flame } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -1838,12 +1838,27 @@ export default function Home() {
               More Creative Generators
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Explore our collection of professional design generators.
+              Explore our latest professional design generators.
               Create stunning visuals with powerful tools and unlimited creative possibilities.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Rainbow Text Generator - Latest */}
+            {/* Fiery Text Generator - Latest */}
+            <Link href="/generators/fiery-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50 border-2 border-orange-200 flex flex-col">
+                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 rounded-lg flex items-center justify-center mb-4">
+                  <Flame className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">Fiery Text Generator</h3>
+                <p className="text-slate-600 mb-4 flex-grow">
+                  Create blazing hot fiery text with 2 authentic fiery fonts and 6 fire color presets. Customize glow effects and download instantly!
+                </p>
+                <div className="text-orange-600 hover:text-orange-700 font-medium text-sm flex items-center mt-auto">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
+            {/* Rainbow Text Generator */}
             <Link href="/generators/rainbow-text" className="h-full">
               <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 border-2 border-purple-200 flex flex-col">
                 <div className="w-12 h-12 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
@@ -1914,36 +1929,6 @@ export default function Home() {
                   Create magical Disney-style text with 8 authentic fonts and 4 stunning presets. Customize and download instantly!
                 </p>
                 <div className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center mt-auto">
-                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
-                </div>
-              </Card>
-            </Link>
-            {/* Underline Text Generator */}
-            <Link href="/generators/underline-text" className="h-full">
-              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200 flex flex-col">
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
-                  <Type className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">Underline Text Generator</h3>
-                <p className="text-slate-600 mb-4 flex-grow">
-                  Create stunning underlined text with 20+ unique styles. Perfect for social media, messaging apps, and creative projects.
-                </p>
-                <div className="text-indigo-600 hover:text-indigo-700 font-medium text-sm flex items-center mt-auto">
-                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
-                </div>
-              </Card>
-            </Link>
-            {/* Dark Souls Text Generator */}
-            <Link href="/generators/dark-souls-text" className="h-full">
-              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-200 flex flex-col">
-                <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-slate-800 rounded-lg flex items-center justify-center mb-4">
-                  <Skull className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">Dark Souls Text Generator</h3>
-                <p className="text-slate-600 mb-4 flex-grow">
-                  Create iconic Dark Souls text messages like "YOU DIED" and "VICTORY ACHIEVED". Perfect for gaming memes and content.
-                </p>
-                <div className="text-red-600 hover:text-red-700 font-medium text-sm flex items-center mt-auto">
                   Try Now <ChevronRight className="w-3 h-3 ml-1" />
                 </div>
               </Card>
