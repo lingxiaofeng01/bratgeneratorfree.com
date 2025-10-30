@@ -133,9 +133,9 @@ export default function FieryTextGenerator() {
 
     const gradientStops = selectedPreset.gradient.match(/#[0-9A-F]{6}/gi) || [];
     if (gradientStops.length >= 2) {
-      gradient.addColorStop(0, gradientStops[0]);
-      gradient.addColorStop(0.5, gradientStops[1] || gradientStops[0]);
-      gradient.addColorStop(1, gradientStops[2] || gradientStops[1] || gradientStops[0]);
+      gradient.addColorStop(0, gradientStops[0] || '#FF4500');
+      gradient.addColorStop(0.5, gradientStops[1] || gradientStops[0] || '#FF8C00');
+      gradient.addColorStop(1, gradientStops[2] || gradientStops[1] || gradientStops[0] || '#FFD700');
     } else {
       // Fallback gradient
       gradient.addColorStop(0, '#FF4500');
