@@ -23,6 +23,12 @@ export async function GET() {
       },
       // Generators - sorted by creation date (newest first)
       {
+        url: `${baseUrl}/generators/bloody-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
         url: `${baseUrl}/generators/spamton-text`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'weekly' as const,

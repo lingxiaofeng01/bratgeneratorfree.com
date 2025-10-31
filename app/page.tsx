@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
-import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard, Skull, Rocket, Rainbow, Flame, Shield, Smile, Gamepad2, ChevronDown, ChevronUp, DollarSign, Waves } from 'lucide-react';
+import { Download, Palette, Type, Sparkles, CornerUpRight, AlignLeft, AlignCenter, AlignRight, FlipHorizontal, FlipVertical, RotateCcw, Save, ChevronRight, Star, Users, Zap, BookOpen, HelpCircle, Share2, Menu, X, Clipboard, Skull, Rocket, Rainbow, Flame, Shield, Smile, Gamepad2, ChevronDown, ChevronUp, DollarSign, Waves, Droplet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -1844,12 +1844,27 @@ export default function Home() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
-            {/* Vaporwave Text Generator - NEW */}
-            <Link href="/generators/vaporwave-text" className="h-full">
-              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-pink-50 via-purple-50 to-cyan-50 border-2 border-pink-200 flex flex-col relative overflow-hidden">
-                <div className="absolute top-2 right-2 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+            {/* Bloody Text Generator - NEW */}
+            <Link href="/generators/bloody-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-red-50 via-slate-50 to-red-50 border-2 border-red-200 flex flex-col relative overflow-hidden">
+                <div className="absolute top-2 right-2 bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white text-xs font-bold px-2 py-1 rounded-full">
                   NEW
                 </div>
+                <div className="w-12 h-12 bg-gradient-to-r from-red-600 via-red-700 to-red-800 rounded-lg flex items-center justify-center mb-4">
+                  <Droplet className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">Bloody Text Generator</h3>
+                <p className="text-slate-600 mb-4 flex-grow">
+                  Create spine-chilling bloody text with dripping blood, gore effects, and horror fonts. Perfect for Halloween and horror projects!
+                </p>
+                <div className="text-red-600 hover:text-red-700 font-medium text-sm flex items-center mt-auto">
+                  Try Now <ChevronRight className="w-3 h-3 ml-1" />
+                </div>
+              </Card>
+            </Link>
+            {/* Vaporwave Text Generator */}
+            <Link href="/generators/vaporwave-text" className="h-full">
+              <Card className="h-full p-6 hover:shadow-lg transition-all hover:scale-105 cursor-pointer bg-gradient-to-br from-pink-50 via-purple-50 to-cyan-50 border-2 border-pink-200 flex flex-col">
                 <div className="w-12 h-12 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4">
                   <Waves className="w-6 h-6 text-white" />
                 </div>
@@ -2088,7 +2103,7 @@ export default function Home() {
               )}
             </Button>
             <p className="text-sm text-slate-500 mt-3">
-              {showAllGenerators ? 'Showing all 14 generators' : 'Showing 7 of 14 generators'}
+              {showAllGenerators ? 'Showing all 15 generators' : 'Showing 8 of 15 generators'}
             </p>
           </div>
         </section>

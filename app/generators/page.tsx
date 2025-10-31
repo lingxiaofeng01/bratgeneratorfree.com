@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket, Rainbow, Gamepad2, Flame, Zap, Shield, Waves, DollarSign } from 'lucide-react';
+import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket, Rainbow, Gamepad2, Flame, Zap, Shield, Waves, DollarSign, Droplet } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
 
@@ -18,6 +18,16 @@ export default function GeneratorsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const generators = [
+    {
+      title: 'Bloody Text Generator',
+      description: 'Create spine-chilling bloody text with dripping blood, gore effects, and horror fonts. 6 blood styles, 8 color presets, and live animations. Perfect for Halloween!',
+      icon: Droplet,
+      href: '/generators/bloody-text',
+      gradient: 'from-red-600 via-red-700 to-red-800',
+      bgGradient: 'from-red-50 via-slate-50 to-red-50',
+      borderColor: 'border-red-200',
+      features: ['6 Blood Styles', '8 Horror Fonts', 'Live Animation', 'Free Download']
+    },
     {
       title: 'Vaporwave Text Generator',
       description: 'Create stunning vaporwave aesthetic text with 8+ authentic color schemes, multiple fonts, and retro effects. Perfect for social media, artwork, and design projects.',
