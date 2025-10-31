@@ -23,6 +23,18 @@ export async function GET() {
       },
       // Generators - sorted by creation date (newest first)
       {
+        url: `${baseUrl}/generators/spamton-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
+        url: `${baseUrl}/generators/vaporwave-text`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+      },
+      {
         url: `${baseUrl}/generators/redacted-text`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'weekly' as const,
@@ -198,6 +210,18 @@ ${allUrls
   </url>
   <url>
     <loc>${baseUrl}/generators</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/generators/spamton-text</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/generators/vaporwave-text</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>

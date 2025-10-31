@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket, Rainbow, Gamepad2, Flame, Zap, Shield } from 'lucide-react';
+import { Sparkles, Skull, ChevronRight, Menu, X, FlipHorizontal, Smile, Rocket, Rainbow, Gamepad2, Flame, Zap, Shield, Waves, DollarSign } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
 
@@ -18,6 +18,16 @@ export default function GeneratorsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const generators = [
+    {
+      title: 'Vaporwave Text Generator',
+      description: 'Create stunning vaporwave aesthetic text with 8+ authentic color schemes, multiple fonts, and retro effects. Perfect for social media, artwork, and design projects.',
+      icon: Waves,
+      href: '/generators/vaporwave-text',
+      gradient: 'from-pink-500 via-purple-500 to-cyan-500',
+      bgGradient: 'from-pink-50 via-purple-50 to-cyan-50',
+      borderColor: 'border-pink-200',
+      features: ['8+ Color Schemes', 'Neon Glow Effects', 'Retro Backgrounds', 'Free Download']
+    },
     {
       title: 'Redacted Text Generator',
       description: 'Free, private text redaction tool. Hide sensitive information instantly. Redact emails, URLs, phone numbers with client-side processing. 100% secure and private!',
@@ -137,6 +147,16 @@ export default function GeneratorsPage() {
       bgGradient: 'from-yellow-50 to-blue-50',
       borderColor: 'border-yellow-200',
       features: ['6 Conversion Modes', 'Instant Copy', 'Meme Ready', '100% Free']
+    },
+    {
+      title: 'Spamton Text Generator',
+      description: 'Transform text into Spamton G. Spamton style from Deltarune! Create [[ BIG SHOT ]] messages with 4 modes, adjustable intensity, and authentic KROMER vibes.',
+      icon: DollarSign,
+      href: '/generators/spamton-text',
+      gradient: 'from-yellow-500 via-pink-500 to-purple-500',
+      bgGradient: 'from-yellow-50 via-pink-50 to-purple-50',
+      borderColor: 'border-yellow-200',
+      features: ['4 Spamton Modes', 'Intensity Control', 'Instant Copy', '[[ FREE ]]']
     }
   ];
 
