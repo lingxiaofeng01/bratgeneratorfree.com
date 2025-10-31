@@ -93,7 +93,6 @@ const SPAMTON_REPLACEMENTS: Record<string, string[]> = {
   'other': ['OTHER', '0THER', 'UDDER'],
   'than': ['THAN', 'TH4N', 'DAN'],
   'then': ['THEN', 'TH3N', 'DEN'],
-  'now': ['NOW', 'N0W', 'NAO'],
   'look': ['LOOK', 'L00K', 'LUK'],
   'only': ['ONLY', '0NLY', 'ONLI'],
   'come': ['COME', 'C0ME', 'CUM'],

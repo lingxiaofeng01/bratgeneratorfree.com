@@ -97,10 +97,9 @@ export default function VaporwaveTextGenerator() {
     setIsDownloading(true);
     try {
       const canvas = await html2canvas(previewRef.current, {
-        backgroundColor: null,
         scale: 2,
         logging: false,
-      });
+      } as any);
       
       const link = document.createElement('a');
       link.download = `vaporwave-text-${Date.now()}.png`;
