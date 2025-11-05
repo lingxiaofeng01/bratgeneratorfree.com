@@ -2226,7 +2226,7 @@ export default function Home() {
       {/* Footer */}
       <footer id="about" className="bg-slate-900 text-white mt-24">
         <div className="container mx-auto px-4 py-12">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-5 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <Sparkles className="w-6 h-6 text-lime-400" />
@@ -2269,8 +2269,8 @@ export default function Home() {
               <h5 className="font-semibold mb-4">Resources</h5>
               <ul className="space-y-2 text-slate-400">
                 <li>
-                  <a 
-                    href="#how-to-use" 
+                  <a
+                    href="#how-to-use"
                     className="hover:text-white transition-colors cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
@@ -2281,16 +2281,16 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <Link 
-                    href="/blog" 
+                  <Link
+                    href="/blog"
                     className="hover:text-white transition-colors"
                   >
                     Blog
                   </Link>
                 </li>
                 <li>
-                  <a 
-                    href="#faq" 
+                  <a
+                    href="#faq"
                     className="hover:text-white transition-colors cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
@@ -2328,6 +2328,21 @@ export default function Home() {
                   >
                     Contact Us
                   </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-semibold mb-4">Friends</h5>
+              <ul className="space-y-2 text-slate-400">
+                <li>
+                  <a
+                    href="https://www.soflowheelie.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    SoFlo Wheelie
+                  </a>
                 </li>
               </ul>
             </div>
